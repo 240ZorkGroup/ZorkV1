@@ -13,6 +13,7 @@ beenHere=true
 ---
 Rotunda balcony:
 beenHere=false
+unlocked=false
 Contents: chainsaw,magicWand
 ---
 Rotunda:
