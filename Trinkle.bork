@@ -26,6 +26,9 @@ donut
 7
 eat:You feel mildly guilt-ridden.
 ---
+quarter
+0
+---
 ===
 Rooms:
 Rotunda
@@ -87,3 +90,9 @@ e
 Basement hallway
 ---
 ===
+NPCs:
+Grue
+Rotunda Balcony
+---
+===
+
