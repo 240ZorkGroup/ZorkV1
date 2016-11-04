@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class CommandFactory {
 
+    
     private static CommandFactory theInstance;
     public static List<String> MOVEMENT_COMMANDS = 
         Arrays.asList("n","w","e","s","u","d" );
