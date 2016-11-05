@@ -25,8 +25,15 @@ public class CommandFactory {
         String parts[] = command.split(" ");
         String verb = parts[0];
         String noun = parts.length >= 2 ? parts[1] : "";
+
         if (verb.equals("save")) {
             return new SaveCommand(noun);
+        }
+        if (verb.equals("health")) {
+            return new HealthCommand();
+        }
+        if (verb.equals("score")) {
+            return new ScoreCommand();
         }
         if (verb.equals("take")) {
             return new TakeCommand(noun);

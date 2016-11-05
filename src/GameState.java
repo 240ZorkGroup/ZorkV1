@@ -25,10 +25,14 @@ public class GameState {
     static String CURRENT_ROOM_LEADER = "Current room: ";
     static String INVENTORY_LEADER = "Inventory: ";
 
+    static int score = 0;
+    static int health = 100;
+
     private static GameState theInstance;
     private Dungeon dungeon;
     private ArrayList<Item> inventory;
     private Room adventurersCurrentRoom;
+
 
     static synchronized GameState instance() {
         if (theInstance == null) {
@@ -164,4 +168,19 @@ public class GameState {
         return dungeon;
     }
 
+    int getHealth(){
+        return health;
+    }
+
+    void setHealth(int healthPoints){
+        this.health = healthPoints;
+    }
+
+    int getScore(){
+        return score;
+    }
+
+    void setScore(int points){
+        this.score = score + points;
+    }
 }
