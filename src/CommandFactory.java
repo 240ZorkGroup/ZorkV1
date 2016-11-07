@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class CommandFactory {
 
-    
+    static int count;
     private static CommandFactory theInstance;
     public static List<String> MOVEMENT_COMMANDS = 
         Arrays.asList("n","w","e","s","u","d" );
@@ -23,6 +23,7 @@ public class CommandFactory {
 
     public Command parse(String command) {
         String parts[] = command.split(" ");
+        count++;
         String verb = parts[0];
         String noun = parts.length >= 2 ? parts[1] : "";
 
