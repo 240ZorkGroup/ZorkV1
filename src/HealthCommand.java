@@ -1,6 +1,8 @@
 //package zeitz_borkv3;
 
-
+/**
+ *
+ */
 class HealthCommand extends Command {
 
     int health = 100;
@@ -8,6 +10,10 @@ class HealthCommand extends Command {
     HealthCommand() {
     }
 
+    /**
+     *
+     * @return
+     */
     public String execute() {
         health = GameState.instance().getHealth();
         if (health == 100) {

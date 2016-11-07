@@ -13,6 +13,12 @@ public class Item {
     private Hashtable<String,String> messages;
 
 
+    /**
+     * Item - added functionality of events for each specific-item command.
+     * @param s The scanner that reads from the file.
+     * @throws NoItemException - no more items
+     * @throws Dungeon.IllegalDungeonFormatException - illegal dungeon format
+     */
     Item(Scanner s) throws NoItemException,
         Dungeon.IllegalDungeonFormatException {
 
@@ -36,7 +42,11 @@ public class Item {
             }
             String[] verbParts = verbLine.split(":");
             messages.put(verbParts[0],verbParts[1]);
-            
+            /**
+             * if (verbParts[0].contains("["))
+             *  check to see if contains a ","
+             *
+             */
             verbLine = s.nextLine();
         }
     }

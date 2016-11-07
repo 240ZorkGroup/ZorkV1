@@ -24,11 +24,15 @@ public class CommandFactory {
     public Command parse(String command) {
         String parts[] = command.split(" ");
         count++;
+
         String verb = parts[0];
         String noun = parts.length >= 2 ? parts[1] : "";
 
         if (verb.equals("save")) {
             return new SaveCommand(noun);
+        }
+        if (verb.equals("verbose")){
+            return new VerboseCommand();
         }
         if (verb.equals("health")) {
             return new HealthCommand();
@@ -46,6 +50,7 @@ public class CommandFactory {
             return new InventoryCommand();
         }
         if (MOVEMENT_COMMANDS.contains(verb)) {
+            GameState.instance().depleteHunger();
             return new MovementCommand(verb);
         }
         if (parts.length == 2) {

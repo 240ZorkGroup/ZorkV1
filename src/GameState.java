@@ -9,6 +9,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+/**
+ * GameState
+ * @author Billy Andrews, Maryfay Jackson, Kelly Morgan
+ * @date 20161107
+ */
 public class GameState {
 
     public static class IllegalSaveFormatException extends Exception {
@@ -34,6 +39,10 @@ public class GameState {
     private Room adventurersCurrentRoom;
 
 
+    /**
+     * instance
+     * @return GameState theInstance - returns the current state of the game, including room, inventory, etc.
+     */
     static synchronized GameState instance() {
         if (theInstance == null) {
             theInstance = new GameState();
@@ -41,10 +50,20 @@ public class GameState {
         return theInstance;
     }
 
+    /**
+     * Constructor
+     */
     private GameState() {
         inventory = new ArrayList<Item>();
     }
 
+    /**
+     * restore
+     * @param filename - denotes which file the game should read from (.bork or .sav)
+     * @throws FileNotFoundException - file not found
+     * @throws IllegalSaveFormatException - illegal save format
+     * @throws Dungeon.IllegalDungeonFormatException - illegal dungeon format
+     */
     void restore(String filename) throws FileNotFoundException,
         IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
 
@@ -85,10 +104,19 @@ public class GameState {
         }
     }
 
+    /**
+     * store - Saves the game's progress
+     * @throws IOException - Thrown if the game cannot save.
+     */
     void store() throws IOException {
         store(DEFAULT_SAVE_FILE);
     }
 
+    /**
+     * store - Saves the game's progress.
+     * @param saveName - the filename
+     * @throws IOException - thrown if the game cannot save.
+     */
     void store(String saveName) throws IOException {
         String filename = saveName + SAVE_FILE_EXTENSION;
         PrintWriter w = new PrintWriter(new FileWriter(filename));
@@ -168,18 +196,41 @@ public class GameState {
         return dungeon;
     }
 
+    /**
+     * getHealth
+     * @return the players health points
+     */
     int getHealth(){
         return health;
     }
 
+    /**
+     * depleteHunger
+     */
+    void depleteHunger(){
+        health = health - 1;
+    }
+
+    /**
+     *
+     * @param healthPoints
+     */
     void setHealth(int healthPoints){
         this.health = healthPoints;
     }
 
+    /**
+     *
+     * @return
+     */
     int getScore(){
         return score;
     }
 
+    /**
+     * setScore - Sets the player's score.
+     * @param points
+     */
     void setScore(int points){
         this.score = score + points;
     }

@@ -1,0 +1,25 @@
+GameState -
+	Javadoc
+		getHealth() - 
+		setHealth() - 
+		getScore() - 
+		setScore() -
+		depleteHunger() - 
+Command -
+	Javadoc
+		() - 
+CommandFactory
+	Javadoc
+		() - 
+HealthCommand
+	Javadoc
+		() -
+ScoreCommand
+	Javadoc
+		() - 
+Item
+	Javadoc
+		() -
+VerboseCommand
+	Javadoc
+		() -
