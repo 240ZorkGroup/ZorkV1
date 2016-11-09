@@ -1,9 +1,11 @@
 //package zeitz_borkv3;
 
 /**
- *
+ * Health Command displays the health message pertaining to the player's health.
+ * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
+ * @version 20161109
  */
-public class HealthCommand extends Command {
+class HealthCommand extends Command {
 
     int health = 100;
 
@@ -11,8 +13,8 @@ public class HealthCommand extends Command {
     }
 
     /**
-     *
-     * @return
+     * Execute method runs the command
+     * @return Respective message according to the player's health.
      */
     public String execute() {
         health = GameState.instance().getHealth();

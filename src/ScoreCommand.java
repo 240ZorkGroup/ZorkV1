@@ -6,19 +6,19 @@
  * @date 20161107
  */
 
-public class ScoreCommand extends Command {
+class ScoreCommand extends Command {
 
     int score = 0;
 
-    /*
-    ScoreCommand Constructor
+    /**
+     * Constructs a score command with the initial score of zero.
      */
     ScoreCommand() {
     }
 
     /**
-     * execute
-     * @return String - Gives feedback about the player's score.
+     * Execute method runs the command.
+     * @return Respective message according to the player's score.
      */
     public String execute() {
         score = GameState.instance().getScore();
