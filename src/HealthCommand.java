@@ -3,7 +3,7 @@
 /**
  *
  */
-class HealthCommand extends Command {
+public class HealthCommand extends Command {
 
     int health = 100;
 

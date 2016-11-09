@@ -6,7 +6,7 @@
  * @date 20161107
  */
 
-class ScoreCommand extends Command {
+public class ScoreCommand extends Command {
 
     int score = 0;
 
