@@ -10,9 +10,9 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 /**
- * GameState
+ * GameState - Keeps track of the current state of the game.
  * @author Billy Andrews, Maryfay Jackson, Kelly Morgan
- * @date 20161107
+ * @version 20161107
  */
 public class GameState {
 
@@ -40,7 +40,7 @@ public class GameState {
 
 
     /**
-     * instance
+     * The Instance.
      * @return GameState theInstance - returns the current state of the game, including room, inventory, etc.
      */
     static synchronized GameState instance() {
@@ -51,7 +51,7 @@ public class GameState {
     }
 
     /**
-     * Constructor
+     * Constructor for GameState provides the player with a new empty inventory.
      */
     private GameState() {
         inventory = new ArrayList<Item>();
@@ -197,31 +197,31 @@ public class GameState {
     }
 
     /**
-     * getHealth
-     * @return the players health points
+     * getHealth - Retrieves the player's current health points, based on a 0-100 scale.
+     * @return the player's health points.
      */
     int getHealth(){
         return health;
     }
 
     /**
-     * depleteHunger
+     * depleteHunger - As the player traverses the dungeon, his hunger takes a toll and subtracts 1 point per movement command.
      */
     void depleteHunger(){
         health = health - 1;
     }
 
     /**
-     *
-     * @param healthPoints
+     * setHealth - Sets the player's health.
+     * @param healthPoints the amount of health points to be added. Can be negative to subtract points.
      */
     void setHealth(int healthPoints){
         this.health = healthPoints;
     }
 
     /**
-     *
-     * @return
+     * getScore - Retrieves the player's current score.
+     * @return returns the score
      */
     int getScore(){
         return score;
@@ -229,7 +229,7 @@ public class GameState {
 
     /**
      * setScore - Sets the player's score.
-     * @param points
+     * @param points the amount of points to be added. Can be negative to subtract points.
      */
     void setScore(int points){
         this.score = score + points;
