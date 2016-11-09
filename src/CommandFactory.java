@@ -1,4 +1,9 @@
-
+/**
+ * Command Factory
+ * This class parses through the input and decides which command is being used.
+ * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
+ * @version 20161109
+ */
 //package zeitz_borkv3;
 
 import java.util.List;
@@ -18,9 +23,19 @@ public class CommandFactory {
         return theInstance;
     }
 
+
+    /**
+     * A CommandFactory constructor creates a blank commandFactory.
+     */
     private CommandFactory() {
     }
 
+
+    /**
+     * Parse sifts through the player's input to decide which command class will be used.
+     * @param command The player's keyboard input
+     * @return a command according to the input.
+     */
     public Command parse(String command) {
         String parts[] = command.split(" ");
         count++;
