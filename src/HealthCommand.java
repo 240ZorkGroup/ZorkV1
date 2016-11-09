@@ -14,7 +14,7 @@ class HealthCommand extends Command {
     }
 
     /**
-     * Execute method runs the command
+     * Execute method runs the health method.
      * @return Respective message according to the player's health.
      */
     public String execute() {
