@@ -74,7 +74,7 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
         setTitle("TTT");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tic Tac Toe", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Grue's Tic Tac Toe", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -943,7 +943,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
-        // TODO add your handling code here:
         reset();
         if (SinglePlayerMode) {
             player1Turn = xGoesFirst == true;
@@ -964,7 +963,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
-        // TODO add your handling code here:
         reset();
         playerXScore = 0;
         playerOScore = 0;
@@ -977,7 +975,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     // Board buttons
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         if (jButton1.getText() == "") {
             if (player1Turn == true) {
                 jButton1.setText("X");

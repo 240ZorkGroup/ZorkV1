@@ -39,14 +39,30 @@ public class NPC {
             this.playerName = in.nextLine();
             System.out.println(monsterName + ": Well nice to meet you, " + playerName + ". ");
 
+            // Start the TicTacToe GUI
             TTT tictactoe = new TTT();
             tictactoe.setVisible(true);
+
+            // Result of winning/losing
+            if (tictactoe.playerOWin())
+                GameState.instance().setScore(100);
+            else
+                GameState.instance().setScore(-100);
+
+            System.out.println("Score: " + GameState.instance().getScore());
+            // Need to wait until the came is complete, then check to see who won and return a proper response.
+
+
 
         } else {
             System.out.println("'I don't have time for that,' you reply.");
             System.out.println("'Maybe next time.'");
             System.out.println();
         }
+    }
+
+    public String getMonsterName(){
+        return this.monsterName;
     }
 
 

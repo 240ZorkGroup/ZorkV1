@@ -11,7 +11,7 @@ public class BlackJackTest {
      */
 
     public static void main(String[] args){
-        System.out.println("This is going to test the blackjack capabilities");
+        System.out.println("This is going to test the blackjack capabilities\n");
         NPC grue = new NPC("Grue");
         grue.converse();
     }
