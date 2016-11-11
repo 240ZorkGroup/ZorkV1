@@ -939,6 +939,7 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     // Menu buttons
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
+
         System.exit(0);
     }//GEN-LAST:event_jButtonExitActionPerformed
 
@@ -1023,7 +1024,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         if (jButton2.getText() == "") {
             if (player1Turn == true) {
                 jButton2.setText("X");
@@ -1072,7 +1072,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
         if (jButton3.getText() == "") {
             if (player1Turn == true) {
                 jButton3.setText("X");
@@ -1121,7 +1120,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         if (jButton4.getText() == "") {
             if (player1Turn == true) {
                 jButton4.setText("X");
@@ -1170,7 +1168,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
         if (jButton5.getText() == "") {
             if (player1Turn == true) {
                 jButton5.setText("X");
@@ -1219,7 +1216,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
         if (jButton6.getText() == "") {
             if (player1Turn == true) {
                 jButton6.setText("X");
@@ -1268,7 +1264,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
         if (jButton7.getText() == "") {
             if (player1Turn == true) {
                 jButton7.setText("X");
@@ -1317,7 +1312,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
         if (jButton8.getText() == "") {
             if (player1Turn == true) {
                 jButton8.setText("X");
@@ -1366,7 +1360,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
         if (jButton9.getText() == "") {
             if (player1Turn == true) {
                 jButton9.setText("X");
@@ -1415,12 +1408,10 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jRadioButton1PStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1PStateChanged
-        // TODO add your handling code here:
 
     }//GEN-LAST:event_jRadioButton1PStateChanged
 
     private void jRadioButton1PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1PActionPerformed
-        // TODO add your handling code here:
         if (jRadioButton2P.isSelected()) {
             competitiveMode = false;
             jCheckBox1.setEnabled(true);
@@ -1441,7 +1432,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jRadioButton1PActionPerformed
 
     private void jRadioButton2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2PActionPerformed
-        // TODO add your handling code here:
         if (jRadioButton1P.isSelected()) {
             competitiveMode = false;
             jCheckBox1.setEnabled(false);
@@ -1462,7 +1452,6 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jRadioButton2PActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
         if (jCheckBox1.isSelected()) {
             competitiveMode = true;
         } else {
@@ -1576,7 +1565,7 @@ public class TTT extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonClear;
-    private javax.swing.JButton jButtonExit;
+    javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonReset;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;

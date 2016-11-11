@@ -1,24 +1,17 @@
-GameState -
-		getHealth() - 
-		setHealth() - 
-		getScore() - 
-		setScore() -
-		depleteHunger() - 
-Command -
-	Javadoc
-		() - 
-CommandFactory
-	Javadoc
-		() - 
-HealthCommand
-	Javadoc
-		() -
-ScoreCommand
-	Javadoc
-		() - 
-Item
-	Javadoc
-		() -
-VerboseCommand
-	Javadoc
-		() -
+Standard Features:
+Score
+Health
+Wound
+Die
+Win
+Dissapear
+Transform
+Teleport
+
+Supplementary:
+Verbose
+Hunger
+Thirst
+External Clock
+Close and Locked Exits
+NPCs
