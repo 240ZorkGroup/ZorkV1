@@ -1,5 +1,4 @@
 GameState -
-	Javadoc
 		getHealth() - 
 		setHealth() - 
 		getScore() - 

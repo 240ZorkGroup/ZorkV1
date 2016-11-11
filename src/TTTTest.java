@@ -3,7 +3,7 @@
  * @author Billy Andrews
  * @version 20161109
  */
-public class BlackJackTest {
+public class TTTTest {
 
     /**
      * Main Tester class

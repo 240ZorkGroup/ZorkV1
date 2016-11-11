@@ -28,11 +28,11 @@ public class NPC {
 
         System.out.println("As you were examining the room, an ugly beast appears. \n" +
                 "Frightened, you reach for anything to use as a weapon. \n\n" +
-                "'Don't be alarmed!!' it shouted. 'I only want to play a game with you. \n" +
-                "It gets lonely in this dungeon of a basement... My name is " + monsterName + ".'\n\n" +
-                "The beast seems harmless.\n");
+                monsterName + ": 'Don't be alarmed! I only want to play a game with you.' \n" +
+                monsterName + ": 'It gets lonely in this dungeon of a basement... My name is " + monsterName + ".'\n\n" +
+                "The beast seems harmless...\n");
 
-        System.out.println("'So what do you say? A quick game of Tic-Tac-Toe?'");
+        System.out.println(monsterName + ": 'So what do you say? A quick game of Tic-Tac-Toe?' (y/n): ");
 
         if (in.nextLine().equalsIgnoreCase("yes") || in.nextLine().equalsIgnoreCase("y")){
             System.out.println(monsterName + ": 'Great! I don't think I caught your name: '");
@@ -43,20 +43,23 @@ public class NPC {
             TTT tictactoe = new TTT();
             tictactoe.setVisible(true);
 
-            // Result of winning/losing
-            if (tictactoe.playerOWin())
-                GameState.instance().setScore(100);
-            else
-                GameState.instance().setScore(-100);
+            // Pause the dialogue while the GUI is on screen.
+            do {
+            } while (tictactoe.isVisible());
 
+            // Once the GUI is closed, this will run.
+            System.out.println(monsterName + ": 'Thanks, "+ playerName + ". Nobody ever wants to play with me. \n" +
+                    "Everyone just walks right past me in Trinkle's basement, like I don't even exist! \n" +
+                    "It's almost like these students can't even see me. Here's an extra 100 points for being nice to me.'");
+
+
+            GameState.instance().setScore(100);
+            System.out.println("100pts added");
             System.out.println("Score: " + GameState.instance().getScore());
-            // Need to wait until the came is complete, then check to see who won and return a proper response.
-
-
 
         } else {
-            System.out.println("'I don't have time for that,' you reply.");
-            System.out.println("'Maybe next time.'");
+            System.out.println("You: 'I don't have time for that right now.'");
+            System.out.println(monsterName + ": 'Maybe next time.'");
             System.out.println();
         }
     }
