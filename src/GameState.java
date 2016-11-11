@@ -234,4 +234,35 @@ public class GameState {
     void setScore(int points){
         this.score = score + points;
     }
+
+    // TODO Wound
+    void wound(int hp){
+        health = health - hp;
+    }
+
+    // TODO Die
+    void die(){
+        //GAME OVER, PLAYER LOSES.
+    }
+
+    // TODO Win
+    void win(){
+        //GAME OVER, PLAYER WINS
+    }
+
+    // TODO Disappear
+    void disappear(Item item){
+        inventory.remove(item);
+    }
+
+    // TODO Transform
+    void transform(Item item1, Item item2){
+        // TRANSFORM item1 INTO item2
+    }
+
+    // TODO Teleport
+    void teleport(){
+
+    }
+
 }
