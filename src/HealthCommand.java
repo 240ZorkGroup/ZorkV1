@@ -10,8 +10,12 @@ class HealthCommand extends Command {
 
     int health = 100;
 
+    /**
+     * Constructor for HealthCommand creates a healthcommand with full life.
+     */
     HealthCommand() {
     }
+
 
     /**
      * Execute method runs the health method.
