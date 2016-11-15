@@ -1,19 +1,19 @@
 Standard Features:
-Score
-Health
+Score                   - done
+Health                  - done
 
 Events:
-Wound
-Die
-Win
-Disappear
-Transform
-Teleport
+Wound                   - done
+Die                     - done
+Win                     - done
+Disappear               - done
+Transform               - done
+Teleport                - done
 
 Supplementary:
-Verbose
-Hunger
-Thirst
-External Clock
-Close and Locked Exits
-NPC/TicTacToe
+Verbose                 - done
+Hunger                  - done
+Thirst                  - Are we still doing this one?
+External Clock          -
+Close and Locked Exits  -
+NPC/TicTacToe           - done / need to implement.
