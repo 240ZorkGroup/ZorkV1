@@ -70,10 +70,6 @@ public class NPC {
         TimeUnit.SECONDS.sleep(2);
         tictactoe.hide();
 
-
-        //call the rest of the game method here.
-
-        //while (!wait){ //while wait == false
         if (tictactoe.playerXWin()) {
             System.out.println("*** " + playerName + " Wins! ***");
             //break;
@@ -85,7 +81,7 @@ public class NPC {
         }
 
         System.out.println("");
-        //TODO - Write if-statement to accept a boolean didPlayerWin and adds the score accordingly.
+
         if (tictactoe.playerXWin()) {
             System.out.println("     " + monsterName + ": Thanks, " + playerName + ". Nobody ever wants to play with me. \n" +
                     "     " + monsterName + ": Everyone just walks right past me in Trinkle's basement, like I don't even exist! \n" +
