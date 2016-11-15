@@ -1,10 +1,12 @@
 Standard Features:
 Score
 Health
+
+Events:
 Wound
 Die
 Win
-Dissapear
+Disappear
 Transform
 Teleport
 
@@ -14,4 +16,4 @@ Hunger
 Thirst
 External Clock
 Close and Locked Exits
-NPCs
+NPC/TicTacToe

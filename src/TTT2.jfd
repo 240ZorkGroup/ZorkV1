@@ -1,0 +1,115 @@
+JFDML JFormDesigner: "5.2.5.0.333" Java: "1.8.0_112-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {comp jPanel1:::p::p, space :0:0:x}}"
+			"$verticalGroup": "par l {seq l {comp jPanel1:::p::p, space :0:0:x}}"
+		} ) {
+			name: "this"
+			"background": sfield java.awt.Color white
+			"foreground": sfield java.awt.Color black
+			"defaultCloseOperation": 2
+			"iconImage": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			"title": "GRUE'S TIC TAC TOE"
+			"alwaysOnTop": true
+			"resizable": false
+			"focusable": false
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp jButton1:::p::p, space :::p, comp jButton2:::p::p, space :::p, comp jButton3:::p::p}, seq l {comp jButton4:::p::p, space :::p, comp jButton5:::p::p, space :::p, comp jButton6:::p::p}, seq l {comp jButton7:::p::p, space :::p, comp jButton8:::p::p, space :::p, comp jButton9:::p::p}, comp jLabelInfoBar::l:::x}, space :::p}}"
+				"$verticalGroup": "par l {seq l {par b {comp jButton2::b:p::p, comp jButton3::b:p::p, comp jButton1::b:p::p}, space :::p, par b {comp jButton4::b:p::p, comp jButton5::b:p::p, comp jButton6::b:p::p}, space :::p, par b {comp jButton7::b:p::p, comp jButton8::b:p::p, comp jButton9::b:p::p}, space :::p, comp jLabelInfoBar:::p::p, space ::24:x}}"
+			} ) {
+				name: "jPanel1"
+				"background": new java.awt.Color( 0, 0, 0, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton2"
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton2ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton3"
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton3ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton4"
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton4ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton5"
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton5ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton6"
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton6ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton7"
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton7ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton8"
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton8ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton9"
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton9ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "jLabelInfoBar"
+					"text": "Your turn"
+					"horizontalAlignment": 0
+					"font": new java.awt.Font( "Dialog", 1, 16 )
+					"maximumSize": new java.awt.Dimension( 75, 40 )
+					"minimumSize": new java.awt.Dimension( 75, 40 )
+					"preferredSize": new java.awt.Dimension( 75, 40 )
+					"horizontalTextPosition": 0
+					"opaque": true
+					"focusable": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jButton1"
+					"maximumSize": new java.awt.Dimension( 75, 75 )
+					"minimumSize": new java.awt.Dimension( 75, 75 )
+					"preferredSize": new java.awt.Dimension( 75, 75 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButton1ActionPerformed", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 260, 325 )
+		} )
+	}
+}
