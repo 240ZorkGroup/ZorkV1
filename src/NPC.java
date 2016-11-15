@@ -95,15 +95,5 @@ public class NPC {
         System.out.println("Score: " + GameState.instance().getScore());
     }
 
-
-    public static boolean playerWin(boolean win){
-        boolean answer;
-        if (win)
-            answer = true;
-        else
-            answer = false;
-        return answer;
-    }
-
 }
 

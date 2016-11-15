@@ -5,12 +5,14 @@
  */
     class VerboseCommand extends Command {
 
-        private boolean verboseToggle = false;
+        public static boolean verboseToggle;
+        public static String command;
 
     /**
      * Constructor for VerboseCommand.
      */
-        VerboseCommand() {
+        VerboseCommand(String command) {
+            this.command = command;
         }
 
         /**
@@ -18,7 +20,18 @@
          * @return Visual confirmation that the verbose mode has been toggled on/off.
          */
         public String execute() {
+            if (command.equalsIgnoreCase("on")) {
+                verboseToggle = true;
+                System.out.println("Verbose mode is on. You will now be told the available exits.");
+            } else if (command.equalsIgnoreCase("off")) {
+                verboseToggle = false;
+                System.out.println("Verbose mode is off. You will no longer be told the available exits.");
+            }
 
             return "";
+        }
+
+        public static boolean getVerbose(){
+            return verboseToggle;
         }
     }
