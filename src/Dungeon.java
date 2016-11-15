@@ -2,6 +2,7 @@
 //package zeitz_borkv3;
 
 import java.util.Hashtable;
+import java.util.Random;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -32,7 +33,7 @@ public class Dungeon {
     private String name;
     private Room entry;
     private Hashtable<String,Room> rooms;
-    private Hashtable<String,Item> items;
+    private static Hashtable<String,Item> items;
     private String filename;
 
     Dungeon(String name, Room entry) {
@@ -161,15 +162,49 @@ public class Dungeon {
         }
     }
 
-    public Room getEntry() { return entry; }
-    public String getName() { return name; }
-    public String getFilename() { return filename; }
-    public void add(Room room) { rooms.put(room.getTitle(),room); }
-    public void add(Item item) { items.put(item.getPrimaryName(),item); }
+    public Room getEntry() {
+        return entry;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+
+    public void add(Room room) {
+        rooms.put(room.getTitle(),room);
+    }
+
+    public void add(Item item) {
+        items.put(item.getPrimaryName(),item);
+    }
+
+    public static void remove(Item item) {
+        items.remove(item);
+    }
 
     public Room getRoom(String roomTitle) {
         return rooms.get(roomTitle);
     }
+
+    /**
+     * Get Random Room
+     * Used by GameState.teleport()
+     * @return random room
+     */
+    public Room getRandomRoom(){
+        int amountOfRooms = rooms.size();
+        int randomNum = (int)(Math.random() * amountOfRooms);
+        Random randomNumber = new Random();
+        Object[] keys = rooms.keySet().toArray();
+        Object key = keys[randomNumber.nextInt(keys.length)];
+        return rooms.get(key);
+    }
+
 
     /**
      * Get the Item object whose primary name is passed. This has nothing to
