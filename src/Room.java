@@ -12,12 +12,14 @@ public class Room {
     }
 
     static String CONTENTS_STARTER = "Contents: ";
+    static String NPCS_STARTER = "NPCs: ";
 
     private String title;
     private String desc;
     private boolean beenHere;
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
+    private ArrayList<NPC> npcs;
 
     Room(String title) {
         init();
@@ -33,15 +35,6 @@ public class Room {
     /**
      * Given a Scanner object positioned at the beginning of a "room" file
      * entry, read and return a Room object representing it.
-     *
-     * @param d         The containing {@link edu.umw.stephen.bork.Dungeon} object,
-     *                  necessary to retrieve {@link edu.umw.stephen.bork.Item} objects.
-     * @param initState should items listed for this room be added to it?
-     * @throws NoRoomException               The reader object is not positioned at the
-     *                                       start of a room entry. A side effect of this is the reader's cursor
-     *                                       is now positioned one line past where it was.
-     * @throws IllegalDungeonFormatException A structural problem with the
-     *                                       dungeon file itself, detected when trying to read this room.
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
             Dungeon.IllegalDungeonFormatException {
@@ -70,6 +63,18 @@ public class Room {
                                 "No such item '" + itemName + "'");
                     }
                 }
+            } else if (lineOfDesc.startsWith(NPCS_STARTER)) {
+                String npcList = lineOfDesc.substring(NPCS_STARTER.length());
+                String[] npcNames = npcList.split(",");
+                for (String npcName : npcNames) {
+                    try {
+                        if (initState) {
+                            add(d.getNPC(npcName));
+                        }
+                    } catch (NPC.NoNPCException e) {
+                        throw new Dungeon.IllegalDungeonFormatException("No such NPC '" + npcName + "'");
+                    }
+                }
             } else {
                 desc += lineOfDesc + "\n";
             }
@@ -87,6 +92,7 @@ public class Room {
     private void init() {
         contents = new ArrayList<Item>();
         exits = new ArrayList<Exit>();
+        npcs = new ArrayList<NPC>();
         beenHere = false;
     }
 
@@ -105,12 +111,19 @@ public class Room {
     void storeState(PrintWriter w) throws IOException {
         w.println(title + ":");
         w.println("beenHere=" + beenHere);
-        if (contents.size() > 0) {
+        if (contents.size() > 0) { // Room Contents
             w.print(CONTENTS_STARTER);
             for (int i = 0; i < contents.size() - 1; i++) {
                 w.print(contents.get(i).getPrimaryName() + ",");
             }
             w.println(contents.get(contents.size() - 1).getPrimaryName());
+        }
+        if (npcs.size() > 0) { // NPCs in Room
+            w.print(NPCS_STARTER);
+            for (int i = 0; i < npcs.size() - 1; i++) {
+                w.print(npcs.get(i) + ",");
+            }
+            w.println(npcs.get(npcs.size() - 1));
         }
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
@@ -156,6 +169,12 @@ public class Room {
             description += "\n";
         }
 
+        if (npcs.size() > 0) {
+            for (NPC npc : npcs) {
+
+            }
+        }
+
         if (VerboseCommand.verboseToggle) {
             for (Exit exit : exits) {
                 description += "\n" + exit.describe();
@@ -166,7 +185,6 @@ public class Room {
         beenHere = true;
         return description;
     }
-
 
 
     public Room leaveBy(String dir) {
@@ -186,6 +204,10 @@ public class Room {
         contents.add(item);
     }
 
+    void add(NPC npc) {
+        npcs.add(npc);
+    }
+
     void remove(Item item) {
         contents.remove(item);
     }
@@ -197,6 +219,19 @@ public class Room {
             }
         }
         throw new Item.NoItemException();
+    }
+
+    NPC getNPCNamed(String name) throws NPC.NoNPCException {
+        for (NPC npc : npcs) {
+            if (npc.goesBy(name)) {
+                return npc;
+            }
+        }
+        throw new NPC.NoNPCException();
+    }
+
+    ArrayList<NPC> getNPCs() {
+        return npcs;
     }
 
     ArrayList<Item> getContents() {

@@ -1,3 +1,4 @@
+import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -9,17 +10,30 @@ import java.util.concurrent.TimeUnit;
  */
 public class NPC {
 
+    static class NoNPCException extends Exception {}
     static TTT2 tictactoe;
     Scanner in = new Scanner(System.in);
-    public static boolean wait = false;
-    public static String monsterName;
-    public static String playerName;
+    private boolean wait = false;
+    private String monsterName;
+    private String playerName;
     /**
      * Constructor class for NPCs will create a named NPC class.
      * @param n The name of the NPC. Choose whatever you want.
      */
-    public NPC(String n){
+    NPC(String n){
         this.monsterName = n;
+    }
+
+    NPC(Scanner s) throws NoNPCException,
+            Dungeon.IllegalDungeonFormatException {
+
+        // Read NPC name.
+        String tempName = s.nextLine();
+        this.monsterName = tempName;
+        if (monsterName.equals(Dungeon.TOP_LEVEL_DELIM)) {
+            throw new NoNPCException();
+        }
+
     }
 
     /**
@@ -27,6 +41,7 @@ public class NPC {
      */
     public void converse(){
 
+        // Dialogue
         System.out.println("As you were examining the room, an ugly beast appears. \n" +
                 "Frightened, you reach for anything to use as a weapon. \n\n" +
                 "     " + monsterName + ": Don't be alarmed! I only wish to play a game with you. \n" +
@@ -35,7 +50,7 @@ public class NPC {
 
         System.out.print("     " + monsterName + ": So what do you say? A quick game of Tic-Tac-Toe? (y/n): ");
         String answer = in.nextLine();
-        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) {
+        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) { // Wants to play Tic Tac Toe
             System.out.print("     " + monsterName + ": Great! I don't think I caught your name. (enter your name): ");
             String name = in.nextLine();
             System.out.println();
@@ -45,10 +60,10 @@ public class NPC {
             System.out.println("");
 
             // Start the TicTacToe GUI
-            tictactoe = new TTT2();
+            tictactoe = new TTT2(monsterName,playerName);
             tictactoe.setVisible(true);
 
-        } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")){
+        } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")){ // Doesn't want to play Tic Tac Toe.
             System.out.println("     " + playerName + ": I don't have time for that right now.");
             System.out.println("     " + monsterName + ": Maybe next time.");
             System.out.println();
@@ -57,15 +72,21 @@ public class NPC {
         }
     }
 
-    public static String getMonsterName(){
+    boolean goesBy(String name) {
+        // could have other aliases
+        return this.monsterName.equals(name);
+    }
+
+
+    public String getMonsterName(){
         return monsterName;
     }
 
-    public static String getPlayerName(){
+    public String getPlayerName(){
         return playerName;
     }
 
-    public static void changeWaitStatus(boolean waitStatus) throws InterruptedException {
+    public void changeWaitStatus(boolean waitStatus) throws InterruptedException {
         wait = waitStatus;
         TimeUnit.SECONDS.sleep(2);
         tictactoe.hide();
