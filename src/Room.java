@@ -8,7 +8,8 @@ import java.io.PrintWriter;
 
 public class Room {
 
-    class NoRoomException extends Exception {}
+    class NoRoomException extends Exception {
+    }
 
     static String CONTENTS_STARTER = "Contents: ";
 
@@ -24,24 +25,26 @@ public class Room {
     }
 
     Room(Scanner s, Dungeon d) throws NoRoomException,
-        Dungeon.IllegalDungeonFormatException {
+            Dungeon.IllegalDungeonFormatException {
 
         this(s, d, true);
     }
 
-    /** Given a Scanner object positioned at the beginning of a "room" file
-        entry, read and return a Room object representing it. 
-        @param d The containing {@link edu.umw.stephen.bork.Dungeon} object, 
-        necessary to retrieve {@link edu.umw.stephen.bork.Item} objects.
-        @param initState should items listed for this room be added to it?
-        @throws NoRoomException The reader object is not positioned at the
-        start of a room entry. A side effect of this is the reader's cursor
-        is now positioned one line past where it was.
-        @throws IllegalDungeonFormatException A structural problem with the
-        dungeon file itself, detected when trying to read this room.
+    /**
+     * Given a Scanner object positioned at the beginning of a "room" file
+     * entry, read and return a Room object representing it.
+     *
+     * @param d         The containing {@link edu.umw.stephen.bork.Dungeon} object,
+     *                  necessary to retrieve {@link edu.umw.stephen.bork.Item} objects.
+     * @param initState should items listed for this room be added to it?
+     * @throws NoRoomException               The reader object is not positioned at the
+     *                                       start of a room entry. A side effect of this is the reader's cursor
+     *                                       is now positioned one line past where it was.
+     * @throws IllegalDungeonFormatException A structural problem with the
+     *                                       dungeon file itself, detected when trying to read this room.
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
-        Dungeon.IllegalDungeonFormatException {
+            Dungeon.IllegalDungeonFormatException {
 
         init();
         title = s.nextLine();
@@ -49,10 +52,10 @@ public class Room {
         if (title.equals(Dungeon.TOP_LEVEL_DELIM)) {
             throw new NoRoomException();
         }
-        
+
         String lineOfDesc = s.nextLine();
         while (!lineOfDesc.equals(Dungeon.SECOND_LEVEL_DELIM) &&
-               !lineOfDesc.equals(Dungeon.TOP_LEVEL_DELIM)) {
+                !lineOfDesc.equals(Dungeon.TOP_LEVEL_DELIM)) {
 
             if (lineOfDesc.startsWith(CONTENTS_STARTER)) {
                 String itemsList = lineOfDesc.substring(CONTENTS_STARTER.length());
@@ -64,7 +67,7 @@ public class Room {
                         }
                     } catch (Item.NoItemException e) {
                         throw new Dungeon.IllegalDungeonFormatException(
-                            "No such item '" + itemName + "'");
+                                "No such item '" + itemName + "'");
                     }
                 }
             } else {
@@ -76,7 +79,7 @@ public class Room {
         // throw away delimiter
         if (!lineOfDesc.equals(Dungeon.SECOND_LEVEL_DELIM)) {
             throw new Dungeon.IllegalDungeonFormatException("No '" +
-                Dungeon.SECOND_LEVEL_DELIM + "' after room.");
+                    Dungeon.SECOND_LEVEL_DELIM + "' after room.");
         }
     }
 
@@ -87,9 +90,13 @@ public class Room {
         beenHere = false;
     }
 
-    String getTitle() { return title; }
+    String getTitle() {
+        return title;
+    }
 
-    void setDesc(String desc) { this.desc = desc; }
+    void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     /*
      * Store the current (changeable) state of this room to the writer
@@ -100,22 +107,22 @@ public class Room {
         w.println("beenHere=" + beenHere);
         if (contents.size() > 0) {
             w.print(CONTENTS_STARTER);
-            for (int i=0; i<contents.size()-1; i++) {
+            for (int i = 0; i < contents.size() - 1; i++) {
                 w.print(contents.get(i).getPrimaryName() + ",");
             }
-            w.println(contents.get(contents.size()-1).getPrimaryName());
+            w.println(contents.get(contents.size() - 1).getPrimaryName());
         }
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
 
-    void restoreState(Scanner s, Dungeon d) throws 
-        GameState.IllegalSaveFormatException {
+    void restoreState(Scanner s, Dungeon d) throws
+            GameState.IllegalSaveFormatException {
 
         String line = s.nextLine();
         if (!line.startsWith("beenHere")) {
             throw new GameState.IllegalSaveFormatException("No beenHere.");
         }
-        beenHere = Boolean.valueOf(line.substring(line.indexOf("=")+1));
+        beenHere = Boolean.valueOf(line.substring(line.indexOf("=") + 1));
 
         line = s.nextLine();
         if (line.startsWith(CONTENTS_STARTER)) {
@@ -126,7 +133,7 @@ public class Room {
                     add(d.getItem(itemName));
                 } catch (Item.NoItemException e) {
                     throw new GameState.IllegalSaveFormatException(
-                        "No such item '" + itemName + "'");
+                            "No such item '" + itemName + "'");
                 }
             }
             s.nextLine();  // Consume "---".
@@ -140,19 +147,28 @@ public class Room {
         } else {
             description = title + "\n" + desc;
         }
+
         for (Item item : contents) {
             description += "\nThere is a " + item.getPrimaryName() + " here.";
         }
-        if (contents.size() > 0) { description += "\n"; }
-        if (!beenHere) {
+
+        if (contents.size() > 0) {
+            description += "\n";
+        }
+
+        if (VerboseCommand.verboseToggle) {
             for (Exit exit : exits) {
                 description += "\n" + exit.describe();
             }
         }
+
+
         beenHere = true;
         return description;
     }
-    
+
+
+
     public Room leaveBy(String dir) {
         for (Exit exit : exits) {
             if (exit.getDir().equals(dir)) {

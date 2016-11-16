@@ -11,8 +11,7 @@ public class TTTTest {
      */
 
     public static void main(String[] args){
-        System.out.println("This is going to test the blackjack capabilities\n");
-        NPC grue = new NPC("Grue");
+        NPC grue = new NPC("GRUE");
         grue.converse();
     }
 }
