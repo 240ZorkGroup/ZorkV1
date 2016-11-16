@@ -29,6 +29,7 @@ Contents: StarWarsToy,WawaTravelMug,donut
 This is a cluttered office, with many geeky toys sprawling on a desk.
 ---
 Room B6
+NPC: Grue
 Sunlight streams through tall windows and illuminates a brilliant classroom.
 ---
 Room B13
@@ -82,3 +83,4 @@ e
 Basement hallway
 ---
 ===
+

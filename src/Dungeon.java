@@ -25,6 +25,7 @@ public class Dungeon {
     public static String ROOMS_MARKER = "Rooms:";
     public static String EXITS_MARKER = "Exits:";
     public static String ITEMS_MARKER = "Items:";
+    public static String NPCS_MARKER = "NPCs:";
     
     // Variables relating to game state (.sav) storage.
     static String FILENAME_LEADER = "Dungeon file: ";
@@ -33,7 +34,8 @@ public class Dungeon {
     private String name;
     private Room entry;
     private Hashtable<String,Room> rooms;
-    private static Hashtable<String,Item> items;
+    private Hashtable<String,Item> items;
+    private Hashtable<String,NPC> npcs;
     private String filename;
 
     Dungeon(String name, Room entry) {
@@ -77,8 +79,7 @@ public class Dungeon {
 
         // Throw away Items starter.
         if (!s.nextLine().equals(ITEMS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" +
-                ITEMS_MARKER + "' line where expected.");
+            throw new IllegalDungeonFormatException("No '" + ITEMS_MARKER + "' line where expected.");
         }
 
         try {
@@ -88,10 +89,22 @@ public class Dungeon {
             }
         } catch (Item.NoItemException e) {  /* end of items */ }
 
+
+        // Throw away NPCs starter.
+        if (!s.nextLine().equals(NPCS_MARKER)) {
+            throw new IllegalDungeonFormatException("No '" + NPCS_MARKER + "' line where expected.");
+        }
+        try {
+            // Instantiate NPCs.
+            while (true) {
+                add(new NPC(s));
+            }
+        } catch (NPC.NoNPCException e) { /* end of NPCs */ }
+
+
         // Throw away Rooms starter.
         if (!s.nextLine().equals(ROOMS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" +
-                ROOMS_MARKER + "' line where expected.");
+            throw new IllegalDungeonFormatException("No '" + ROOMS_MARKER + "' line where expected.");
         }
 
         try {
@@ -107,8 +120,7 @@ public class Dungeon {
 
         // Throw away Exits starter.
         if (!s.nextLine().equals(EXITS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" +
-                EXITS_MARKER + "' line where expected.");
+            throw new IllegalDungeonFormatException("No '" + EXITS_MARKER + "' line where expected.");
         }
 
         try {
@@ -126,6 +138,7 @@ public class Dungeon {
     private void init() {
         rooms = new Hashtable<String,Room>();
         items = new Hashtable<String,Item>();
+        npcs = new Hashtable<String,NPC>();
     }
 
     /*
@@ -179,11 +192,15 @@ public class Dungeon {
         rooms.put(room.getTitle(),room);
     }
 
+    public void add(NPC npc) {
+        npcs.put(npc.getMonsterName(),npc);
+    }
+
     public void add(Item item) {
         items.put(item.getPrimaryName(),item);
     }
 
-    public static void remove(Item item) {
+    public void remove(Item item) {
         items.remove(item);
     }
 
@@ -217,5 +234,12 @@ public class Dungeon {
             throw new Item.NoItemException();
         }
         return items.get(primaryItemName);
+    }
+
+    public NPC getNPC(String primaryNPCName) throws NPC.NoNPCException {
+        if (npcs.get(primaryNPCName) == null) {
+            throw new NPC.NoNPCException();
+        }
+        return npcs.get(primaryNPCName);
     }
 }

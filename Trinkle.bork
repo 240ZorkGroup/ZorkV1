@@ -30,6 +30,10 @@ quarter
 0
 ---
 ===
+NPCs:
+Grue
+---
+===
 Rooms:
 Rotunda
 You are in a beautiful round entry chamber, with tall white pillars that
@@ -47,6 +51,7 @@ This is a cluttered office, with many geeky toys sprawling on a desk.
 ---
 Room B6
 Contents: chainsaw
+NPCs: Grue
 Sunlight streams through tall windows and illuminates a brilliant classroom.
 ---
 Rotunda balcony
