@@ -18,14 +18,14 @@ import static java.awt.Color.BLACK;
 public class TTT2 extends JFrame implements ActionListener {
 
     //Fields
-    String monsterName = NPC.getMonsterName();
-    String playerName = NPC.getPlayerName();
-    boolean xGoesFirst = true;
-    boolean player1Turn = true;
-    boolean SinglePlayerMode = true;
-    static int playerXScore = 0;
-    static int playerOScore = 0;
-    static int playerTScore = 0;
+    private String monsterName;
+    private String playerName;
+    private boolean xGoesFirst = true;
+    private boolean player1Turn = true;
+    private boolean SinglePlayerMode = true;
+    private static int playerXScore = 0;
+    private static int playerOScore = 0;
+    private static int playerTScore = 0;
     static char but1 = '\u0000';
     static char but2 = '\u0000';
     static char but3 = '\u0000';
@@ -39,8 +39,10 @@ public class TTT2 extends JFrame implements ActionListener {
     /**
      * Constructor for TTT2
      */
-    public TTT2() {
+    public TTT2(String mName, String pName) {
         initComponents();
+        monsterName = mName;
+        playerName = pName;
     }
 
     /**
@@ -92,7 +94,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton2.addActionListener(e -> {
                 try {
                     jButton2ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -105,7 +107,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton3.addActionListener(e -> {
                 try {
                     jButton3ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -118,7 +120,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton4.addActionListener(e -> {
                 try {
                     jButton4ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -131,7 +133,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton5.addActionListener(e -> {
                 try {
                     jButton5ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -144,7 +146,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton6.addActionListener(e -> {
                 try {
                     jButton6ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -157,7 +159,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton7.addActionListener(e -> {
                 try {
                     jButton7ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -170,7 +172,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton8.addActionListener(e -> {
                 try {
                     jButton8ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -183,7 +185,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton9.addActionListener(e -> {
                 try {
                     jButton9ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -207,7 +209,7 @@ public class TTT2 extends JFrame implements ActionListener {
             jButton1.addActionListener(e -> {
                 try {
                     jButton1ActionPerformed(e);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException | NPC.NoNPCException e1) {
                     e1.printStackTrace();
                 }
             });
@@ -301,7 +303,9 @@ public class TTT2 extends JFrame implements ActionListener {
 
 
     /**
-     * The code to make the game 1-Player mode.
+     * COMPUTER, GO!
+     *
+     * The code for when it's the computer's turn. An excessively long algorithm I created.
      */
     public void computerGo() {
         String[] buttonListStrings = {jButton1.getText(), jButton2.getText(), jButton3.getText(),
@@ -829,7 +833,7 @@ public class TTT2 extends JFrame implements ActionListener {
 
     // Board buttons
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton1ActionPerformed
         if (jButton1.getText() == "") {
             if (player1Turn == true) {
                 jButton1.setText("X");
@@ -841,13 +845,13 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     playerTScore += 1;
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else {
                     if (SinglePlayerMode) {
                         computerGo();
@@ -864,12 +868,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -877,7 +881,7 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton2ActionPerformed
         if (jButton2.getText() == "") {
             if (player1Turn == true) {
                 jButton2.setText("X");
@@ -889,12 +893,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 } else {
                     if (SinglePlayerMode) {
@@ -912,12 +916,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -925,7 +929,7 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton3ActionPerformed
         if (jButton3.getText() == "") {
             if (player1Turn == true) {
                 jButton3.setText("X");
@@ -937,12 +941,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 } else {
                     if (SinglePlayerMode) {
@@ -960,12 +964,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -973,7 +977,7 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton4ActionPerformed
         if (jButton4.getText() == "") {
             if (player1Turn == true) {
                 jButton4.setText("X");
@@ -985,12 +989,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 } else {
                     if (SinglePlayerMode) {
@@ -1008,12 +1012,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -1021,7 +1025,7 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton5ActionPerformed
         if (jButton5.getText() == "") {
             if (player1Turn == true) {
                 jButton5.setText("X");
@@ -1033,12 +1037,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 } else {
                     if (SinglePlayerMode) {
@@ -1056,12 +1060,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -1069,7 +1073,7 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton6ActionPerformed
         if (jButton6.getText() == "") {
             if (player1Turn == true) {
                 jButton6.setText("X");
@@ -1080,14 +1084,14 @@ public class TTT2 extends JFrame implements ActionListener {
                     playerXScore += 1;
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     changeFirstPlayer();
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
                     playerTScore += 1;
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else {
                     if (SinglePlayerMode) {
                         computerGo();
@@ -1103,21 +1107,21 @@ public class TTT2 extends JFrame implements ActionListener {
                     playerOScore += 1;
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     changeFirstPlayer();
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
                     playerTScore += 1;
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 }
                 changeButtonColor();
             }
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton7ActionPerformed
         if (jButton7.getText() == "") {
             if (player1Turn == true) {
                 jButton7.setText("X");
@@ -1129,13 +1133,13 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
                     playerTScore += 1;
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else {
                     if (SinglePlayerMode) {
                         computerGo();
@@ -1152,12 +1156,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -1165,7 +1169,7 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton8ActionPerformed
         if (jButton8.getText() == "") {
             if (player1Turn == true) {
                 jButton8.setText("X");
@@ -1177,12 +1181,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 } else {
                     if (SinglePlayerMode) {
@@ -1200,12 +1204,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -1213,7 +1217,7 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException, NPC.NoNPCException {//GEN-FIRST:event_jButton9ActionPerformed
         if (jButton9.getText() == "") {
             if (player1Turn == true) {
                 jButton9.setText("X");
@@ -1225,12 +1229,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(playerName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 } else {
                     if (SinglePlayerMode) {
@@ -1248,12 +1252,12 @@ public class TTT2 extends JFrame implements ActionListener {
                     jLabelInfoBar.setText(monsterName + " WINS!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                 } else if (full() == true) {
                     jLabelInfoBar.setText("TIE!");
                     disableButtons();
                     changeFirstPlayer();
-                    NPC.changeWaitStatus(true);
+                    GameState.instance().getAdventurersCurrentRoom().getNPCNamed(monsterName).changeWaitStatus(true);
                     playerTScore += 1;
                 }
                 changeButtonColor();
@@ -1318,44 +1322,44 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }
 
-    /**
-     * The Main Method.
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TTT2().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * The Main Method.
+//     *
+//     * @param args the command line arguments
+//     */
+//    public static void main(String[] args) {
+//
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new TTT2(this.g.monsterName,this.playerName).setVisible(true);
+//            }
+//        });
+//    }
 
     /**
      * Invoked when an action occurs.
