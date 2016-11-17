@@ -25,9 +25,18 @@ class ItemSpecificCommand extends Command {
         
         String msg = itemReferredTo.getMessageForVerb(verb);
 
-        //switch
-        //if verb == drink
-            //then msg += something new;
+        //TODO switch for ItemSpecificCommands
+        switch (verb) {
+            case "drink":
+                if (noun == "DrPepper"){
+                    System.out.println("This needs to transform into an EmptyCan now.");
+                    //GameState.instance().transform(DrPepper,emptyCan);
+                }
+                break;
+            //add more to it.
+        }
+
+
 
         return (msg == null ? 
             "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
