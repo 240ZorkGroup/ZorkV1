@@ -289,7 +289,7 @@ public class GameState {
      */
     void transform(Item item1, Item item2) throws Item.NoItemException {
         disappear(item1);
-        dungeon.add(item2);// dungeon
+        dungeon.add(item2);// dungeon   //TODO this might be wrong.
         addToInventory(item2); // inventory
     }
 

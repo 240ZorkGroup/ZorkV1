@@ -10,6 +10,7 @@ public class Item {
 
     private String primaryName;
     private int weight;
+    private Hashtable<String,Hashtable<String,String>> premessages;
     private Hashtable<String,String> messages;
 
 
@@ -40,26 +41,25 @@ public class Item {
                 throw new Dungeon.IllegalDungeonFormatException("No '" + Dungeon.SECOND_LEVEL_DELIM + "' after item.");
             }
 
-            String[] verbParts = verbLine.split(":");               // Splits original string
+            //TODO finish the itemSpecificCommands with EVENTS
+            String[] verbParts = verbLine.split(":");                                       // Splits original string
             if (verbParts[0].contains("[")) {
                 String command = verbParts[0].substring(0, verbParts[0].indexOf("["));      // Gives the command
                 messages.put(command,verbParts[1]);                                         // puts the command and verb in messages
-                String event = verbParts[0].substring(verbParts[0].indexOf("[")-1, verbParts[0].indexOf("]"));          // separates the events
-                if (event.contains(",")) {
+                String event = verbParts[0].substring(verbParts[0].indexOf("[")+1, verbParts[0].indexOf("]"));          // separates the events [] from the command
+                if (event.contains(",")) {                                                  // splits the events if there are more than 1
                     String[] events = event.split(",");
-
+                    for (String ele : events){
+                        System.out.println(ele);                                            //TODO Debug/testing Print lines
+                        //messages.put(command,event);
+                    }
+                } else {
+                    System.out.println(event);                                              //TODO debug/testing print lines.
+                    //messages.put(command,event);
                 }
             } else {
                 messages.put(verbParts[0],verbParts[1]);
             }
-
-
-
-            /**
-             * if (verbParts[0].contains("["))
-             *  check to see if contains a ","
-             *
-             */
             verbLine = s.nextLine();
         }
     }
@@ -77,5 +77,9 @@ public class Item {
 
     public String toString() {
         return primaryName;
+    }
+
+    public int getWeight(){
+        return weight;
     }
 }

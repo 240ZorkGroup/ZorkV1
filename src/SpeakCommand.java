@@ -22,8 +22,12 @@ class SpeakCommand extends Command {
      * Execute method runs the command
      * @return Respective message according to the player's health.
      */
-    public String execute() throws NPC.NoNPCException {
-        GameState.instance().getAdventurersCurrentRoom().getNPCNamed(noun).converse();
+    public String execute()  {
+        try {
+            GameState.instance().getAdventurersCurrentRoom().getNPCNamed(noun).converse();
+        } catch (NPC.NoNPCException e) {
+            e.printStackTrace();
+        }
         return "";
     }
 }
