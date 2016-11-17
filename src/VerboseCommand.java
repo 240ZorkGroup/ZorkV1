@@ -5,7 +5,7 @@
  */
     class VerboseCommand extends Command {
 
-        public static boolean verboseToggle;
+        public static boolean verboseToggle = true;
         public static String command;
 
     /**

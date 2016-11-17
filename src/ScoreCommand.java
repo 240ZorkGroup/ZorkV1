@@ -8,7 +8,7 @@
 
 class ScoreCommand extends Command {
 
-    int score = GameState.instance().getScore();
+    int score = 7;
 
     /**
      * Constructs a score command with the initial score of zero.
@@ -21,11 +21,12 @@ class ScoreCommand extends Command {
      * @return Respective message according to the player's score.
      */
     public String execute() {
+        score = GameState.instance().getScore();
         if (score == 0) {
             return "Score: " +score +" - You haven't scored any points yet.\n";
         } else if (score < 100 && score > 0){
             return "Score: " +score +" - Your score is okay.";
-        } else if (score > 100) {
+        } else if (score >= 100) {
             return "Score: " +score +" - Your score is great!";
         }
         return "";
