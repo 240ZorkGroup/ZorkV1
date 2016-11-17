@@ -169,10 +169,12 @@ public class Room {
             description += "\n";
         }
 
-        if (npcs.size() > 0) {
-            for (NPC npc : npcs) {
+        for (NPC npc : npcs) {
+            //description += "\n"+GameState.instance().getAdventurersCurrentRoom().getNPCNamed(npc)+" is in here.";
+        }
 
-            }
+        if (npcs.size() > 0) {
+            description += "\n";
         }
 
         if (VerboseCommand.verboseToggle) {

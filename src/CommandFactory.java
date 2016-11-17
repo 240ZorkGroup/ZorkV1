@@ -49,6 +49,9 @@ public class CommandFactory {
         if (verb.equals("verbose")){
             return new VerboseCommand(noun);
         }
+        if (verb.equals("speak")) {
+            return new SpeakCommand(noun);
+        }
         if (verb.equals("health")) {
             return new HealthCommand();
         }

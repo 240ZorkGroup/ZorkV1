@@ -37,11 +37,24 @@ public class Item {
         String verbLine = s.nextLine();
         while (!verbLine.equals(Dungeon.SECOND_LEVEL_DELIM)) {
             if (verbLine.equals(Dungeon.TOP_LEVEL_DELIM)) {
-                throw new Dungeon.IllegalDungeonFormatException("No '" +
-                    Dungeon.SECOND_LEVEL_DELIM + "' after item.");
+                throw new Dungeon.IllegalDungeonFormatException("No '" + Dungeon.SECOND_LEVEL_DELIM + "' after item.");
             }
-            String[] verbParts = verbLine.split(":");
-            messages.put(verbParts[0],verbParts[1]);
+
+            String[] verbParts = verbLine.split(":");               // Splits original string
+            if (verbParts[0].contains("[")) {
+                String command = verbParts[0].substring(0, verbParts[0].indexOf("["));      // Gives the command
+                messages.put(command,verbParts[1]);                                         // puts the command and verb in messages
+                String event = verbParts[0].substring(verbParts[0].indexOf("[")-1, verbParts[0].indexOf("]"));          // separates the events
+                if (event.contains(",")) {
+                    String[] events = event.split(",");
+
+                }
+            } else {
+                messages.put(verbParts[0],verbParts[1]);
+            }
+
+
+
             /**
              * if (verbParts[0].contains("["))
              *  check to see if contains a ","
