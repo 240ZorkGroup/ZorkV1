@@ -43,28 +43,31 @@ public class CommandFactory {
         String verb = parts[0];
         String noun = parts.length >= 2 ? parts[1] : "";
 
-        if (verb.equals("save")) {
+        if (verb.equalsIgnoreCase("save")) {
             return new SaveCommand(noun);
         }
-        if (verb.equals("verbose")){
+        if (verb.equalsIgnoreCase("verbose")){
             return new VerboseCommand(noun);
         }
-        if (verb.equals("speak")) {
+        if (verb.equalsIgnoreCase("speak")) {
             return new SpeakCommand(noun);
         }
-        if (verb.equals("health")) {
+ //       if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to")) {
+ //           return new SpeakCommand(parts[2]);
+ //       }
+        if (verb.equalsIgnoreCase("health")) {
             return new HealthCommand();
         }
-        if (verb.equals("score")) {
+        if (verb.equalsIgnoreCase("score")) {
             return new ScoreCommand();
         }
-        if (verb.equals("take")) {
+        if (verb.equalsIgnoreCase("take")) {
             return new TakeCommand(noun);
         }
-        if (verb.equals("drop")) {
+        if (verb.equalsIgnoreCase("drop")) {
             return new DropCommand(noun);
         }
-        if (verb.equals("i") || verb.equals("inventory")) {
+        if (verb.equalsIgnoreCase("i") || verb.equalsIgnoreCase("inventory")) {
             return new InventoryCommand();
         }
         if (MOVEMENT_COMMANDS.contains(verb)) {

@@ -170,7 +170,7 @@ public class Room {
         }
 
         for (NPC npc : npcs) {
-            //description += "\n"+GameState.instance().getAdventurersCurrentRoom().getNPCNamed(npc)+" is in here.";
+            description += "\n" + npc.getMonsterName() + " is in here.";
         }
 
         if (npcs.size() > 0) {

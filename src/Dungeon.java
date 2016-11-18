@@ -222,6 +222,9 @@ public class Dungeon {
         return rooms.get(key);
     }
 
+    public Hashtable<String,Item> getItems(){
+        return this.items;
+    }
 
     /**
      * Get the Item object whose primary name is passed. This has nothing to
