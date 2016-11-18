@@ -248,13 +248,13 @@ public class GameState {
         }
     }
 
-
     /**
      * Die
      * The player loses and the game ends.
      */
     void die(){
         System.out.println("YOU LOST!");
+        System.out.println("GAME OVER");
         System.exit(0);
     }
 
@@ -264,6 +264,7 @@ public class GameState {
      */
     void win(){
         System.out.println("YOU WON!");
+        System.out.println("GAME OVER");
         System.exit(0);
     }
 
@@ -281,17 +282,17 @@ public class GameState {
     }
 
 
-    /**
-     * Transform
-     * @param item1 Item to disappear (disappear()).
-     * @param item2 Item to replace item1.
-     * @throws Item.NoItemException if the item does not exist.
-     */
-    void transform(Item item1, Item item2) throws Item.NoItemException {
-        disappear(item1);
-        dungeon.add(item2);// dungeon   //TODO this might be wrong.
-        addToInventory(item2); // inventory
-    }
+//    /**
+//     * Transform
+//     * @param item1 Item to disappear (disappear()).
+//     * @param item2 Item to replace item1.
+//     * @throws Item.NoItemException if the item does not exist.
+//     */
+//    void transform(Item item1, Item item2) throws Item.NoItemException {
+//        GameState.instance().disappear(item1);
+//        dungeon.add(item2);// dungeon   //TODO this might be wrong.
+//        GameState.instance().addToInventory(item2); // inventory
+//    }
 
     /**
      * Teleport

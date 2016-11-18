@@ -1,29 +1,33 @@
 
 //package zeitz_borkv3;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Hashtable;
 
 public class Item {
 
-    static class NoItemException extends Exception {}
+    static class NoItemException extends Exception {
+    }
 
     private String primaryName;
     private int weight;
-    private Hashtable<String,Hashtable<String,String>> premessages;
-    private Hashtable<String,String> messages;
+    private Hashtable<String, ArrayList<String>> events;
+    private Hashtable<String, String> messages;
 
 
     /**
      * Item - added functionality of events for each specific-item command.
+     *
      * @param s The scanner that reads from the file.
-     * @throws NoItemException - no more items
+     * @throws NoItemException                       - no more items
      * @throws Dungeon.IllegalDungeonFormatException - illegal dungeon format
      */
     Item(Scanner s) throws NoItemException,
-        Dungeon.IllegalDungeonFormatException {
+            Dungeon.IllegalDungeonFormatException {
 
-        messages = new Hashtable<String,String>();
+        messages = new Hashtable<String, String>();
+        events = new Hashtable<String,ArrayList<String>>();
 
         // Read item name.
         primaryName = s.nextLine();
@@ -36,29 +40,40 @@ public class Item {
 
         // Read and parse verbs lines, as long as there are more.
         String verbLine = s.nextLine();
+        System.out.println(primaryName);                                                        // TODO Debug/Testing print lines.
         while (!verbLine.equals(Dungeon.SECOND_LEVEL_DELIM)) {
             if (verbLine.equals(Dungeon.TOP_LEVEL_DELIM)) {
                 throw new Dungeon.IllegalDungeonFormatException("No '" + Dungeon.SECOND_LEVEL_DELIM + "' after item.");
             }
 
-            //TODO finish the itemSpecificCommands with EVENTS
+
+            //TODO finish the itemSpecificCommands with EVENTS.
+
             String[] verbParts = verbLine.split(":");                                       // Splits original string
-            if (verbParts[0].contains("[")) {
+            if (verbParts[0].contains("[")) {                                               // If there is an event for the itemSpecificCommand:
                 String command = verbParts[0].substring(0, verbParts[0].indexOf("["));      // Gives the command
-                messages.put(command,verbParts[1]);                                         // puts the command and verb in messages
-                String event = verbParts[0].substring(verbParts[0].indexOf("[")+1, verbParts[0].indexOf("]"));          // separates the events [] from the command
-                if (event.contains(",")) {                                                  // splits the events if there are more than 1
-                    String[] events = event.split(",");
-                    for (String ele : events){
-                        System.out.println(ele);                                            //TODO Debug/testing Print lines
-                        //messages.put(command,event);
+                messages.put(command, verbParts[1]);                                        // puts the command and verb in "messages"
+                String event = verbParts[0].substring(verbParts[0].indexOf("[") + 1, verbParts[0].indexOf("]"));   // separates the event from the command
+
+                if (event.contains(",")) {                                          // If there is more than 1 event:
+                    String[] eventMessages = event.split(",");                              // Split the events up and put them in String[] "eventMessages"
+                    ArrayList<String> eventsList = new ArrayList<String>();
+                    for (String ele : eventMessages){                                       // for each element in String[] "eventMessages"
+                        System.out.println(" - " + command + " : " + ele);                                            // TODO Debug/Testing print lines.
+                        eventsList.add(ele);
+                        events.put(command, eventsList);                                    // Put the command and element in the Hashtable "events" (for all elements)
                     }
+
                 } else {
-                    System.out.println(event);                                              //TODO debug/testing print lines.
-                    //messages.put(command,event);
+                    ArrayList<String> eventsList = new ArrayList<String>();         // If there is only one event:
+                    eventsList.add(event);
+                    System.out.println(" - " + command + " : " + event);                                            // TODO Debug/Testing print lines.
+                    events.put(command, eventsList);                                        // Put the command and the event in Hashtable "events".
                 }
-            } else {
-                messages.put(verbParts[0],verbParts[1]);
+
+            } else {                                                                // If there are no events:
+                System.out.println(" - " + verbParts[0]);                                            // TODO Debug/Testing print lines.
+                messages.put(verbParts[0], verbParts[1]);                                   // Put the command and message in "messages"
             }
             verbLine = s.nextLine();
         }
@@ -69,7 +84,9 @@ public class Item {
         return this.primaryName.equals(name);
     }
 
-    String getPrimaryName() { return primaryName; }
+    String getPrimaryName() {
+        return primaryName;
+    }
 
     public String getMessageForVerb(String verb) {
         return messages.get(verb);
@@ -79,7 +96,22 @@ public class Item {
         return primaryName;
     }
 
-    public int getWeight(){
+    public int getWeight() {
         return weight;
+    }
+
+    public ArrayList<String> getEventForVerb(String verbsWithEvents) {
+        return events.get(verbsWithEvents);
+    }
+
+    /**
+     * Transform
+     * @param item Item to replace this item.
+     * @throws Item.NoItemException if the item does not exist.
+     */
+    void transform(Item item) throws Item.NoItemException {
+        GameState.instance().getDungeon().add(item);// dungeon   //TODO this might be wrong.
+        GameState.instance().addToInventory(item); // inventory
+        GameState.instance().disappear(this);
     }
 }
