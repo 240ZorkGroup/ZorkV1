@@ -216,7 +216,7 @@ public class GameState {
      * @param healthPoints the amount of health points to be added. Can be negative to subtract points.
      */
     void setHealth(int healthPoints){
-        this.health = healthPoints;
+        this.health = health + healthPoints;
     }
 
     /**
@@ -242,7 +242,7 @@ public class GameState {
      * @param hp the number of points to deduct from the player's health. Using a negative number will "heal" the player.
      */
     void wound(int hp){
-        health = health - hp;
+        setHealth(hp);
         if (health <= 0){
             die();
         }
