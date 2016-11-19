@@ -38,7 +38,6 @@ class ItemSpecificCommand extends Command {
                 String[] evt2 = evt.split("\\(");
                 command = evt2[0];
                 //nums = Integer.parseInt(evt2[1].substring(0, evt2[1].indexOf(")")));
-                //mesages.put(command, verbParts[1]);                                        // puts the command and verb in "messages"
             } else {
                 command = evt;
             }
@@ -62,7 +61,7 @@ class ItemSpecificCommand extends Command {
                                 e.printStackTrace();
                             }
                             GameState.instance().wound(-1);
-                            System.out.print("You were just wounded.");
+                            System.out.print("You were just wounded.");  //TODO For some reason, everything passes through twice because this prints twice when called.
                         }
                         break;
                     case "stomp":
