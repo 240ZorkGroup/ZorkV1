@@ -38,6 +38,8 @@ public class TTT2 extends JFrame implements ActionListener {
 
     /**
      * Constructor for TTT2
+     * @param mName the monster's name
+     * @param pName the player's name
      */
     public TTT2(String mName, String pName) {
         initComponents();
@@ -1364,7 +1366,7 @@ public class TTT2 extends JFrame implements ActionListener {
     /**
      * Invoked when an action occurs.
      *
-     * @param e
+     * @param e exception to say Not supported yet.
      */
     @Override
     public void actionPerformed(ActionEvent e) {

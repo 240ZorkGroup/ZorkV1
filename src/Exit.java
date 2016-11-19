@@ -25,8 +25,9 @@ public class Exit {
         @throws NoExitException The reader object is not positioned at the
         start of an exit entry. A side effect of this is the reader's cursor
         is now positioned one line past where it was.
-        @throws IllegalDungeonFormatException A structural problem with the
+        @throws Dungeon.IllegalDungeonFormatException A structural problem with the
         dungeon file itself, detected when trying to read this room.
+     *  @param s Scanner to read everything in.
      */
     Exit(Scanner s, Dungeon d) throws NoExitException,
         Dungeon.IllegalDungeonFormatException {
