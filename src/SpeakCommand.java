@@ -3,6 +3,7 @@
 
 /**
  * Health Command displays the health message pertaining to the player's health.
+ *
  * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
  * @version 20161109
  */
@@ -12,6 +13,7 @@ class SpeakCommand extends Command {
 
     /**
      * Constructor for HealthCommand creates a healthcommand with full life.
+     *
      * @param noun the noun
      */
     SpeakCommand(String noun) {

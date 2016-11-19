@@ -5,25 +5,45 @@ import java.util.concurrent.TimeUnit;
 /**
  * NPC - Non-Player Characters
  * This class provides an NPC that the player can interact with.
+ *
  * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
  * @version 20161109
  */
 public class NPC {
 
+    /**
+     * The type No npc exception.
+     */
     static class NoNPCException extends Exception {}
+
+    /**
+     * The Tictactoe.
+     */
     static TTT2 tictactoe;
+    /**
+     * The In.
+     */
     Scanner in = new Scanner(System.in);
     private boolean wait = false;
     private String monsterName;
     private String playerName;
+
     /**
      * Constructor class for NPCs will create a named NPC class.
+     *
      * @param n The name of the NPC. Choose whatever you want.
      */
     NPC(String n){
         this.monsterName = n;
     }
 
+    /**
+     * Instantiates a new Npc.
+     *
+     * @param s the s
+     * @throws NoNPCException                the no npc exception
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
+     */
     NPC(Scanner s) throws NoNPCException,
             Dungeon.IllegalDungeonFormatException {
 
@@ -72,20 +92,42 @@ public class NPC {
         }
     }
 
+    /**
+     * Goes by boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     boolean goesBy(String name) {
         // could have other aliases
         return this.monsterName.equals(name);
     }
 
 
+    /**
+     * Get monster name string.
+     *
+     * @return the string
+     */
     public String getMonsterName(){
         return monsterName;
     }
 
+    /**
+     * Get player name string.
+     *
+     * @return the string
+     */
     public String getPlayerName(){
         return playerName;
     }
 
+    /**
+     * Change wait status.
+     *
+     * @param waitStatus the wait status
+     * @throws InterruptedException the interrupted exception
+     */
     public void changeWaitStatus(boolean waitStatus) throws InterruptedException {
         wait = waitStatus;
         TimeUnit.SECONDS.sleep(2);

@@ -1,11 +1,19 @@
 
 //package zeitz_borkv3;
 
+/**
+ * The type Movement command.
+ */
 class MovementCommand extends Command {
 
     private String dir;
-                       
 
+
+    /**
+     * Instantiates a new Movement command.
+     *
+     * @param dir the direction
+     */
     MovementCommand(String dir) {
         this.dir = dir;
     }

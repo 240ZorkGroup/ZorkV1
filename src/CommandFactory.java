@@ -9,13 +9,27 @@
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * The type Command factory.
+ */
 public class CommandFactory {
 
+    /**
+     * The Count.
+     */
     static int count;
     private static CommandFactory theInstance;
-    public static List<String> MOVEMENT_COMMANDS = 
+    /**
+     * The Movement commands.
+     */
+    public static List<String> MOVEMENT_COMMANDS =
         Arrays.asList("n","w","e","s","u","d" );
 
+    /**
+     * Instance command factory.
+     *
+     * @return the command factory
+     */
     public static synchronized CommandFactory instance() {
         if (theInstance == null) {
             theInstance = new CommandFactory();
@@ -33,6 +47,7 @@ public class CommandFactory {
 
     /**
      * Parse sifts through the player's input to decide which command class will be used.
+     *
      * @param command The player's keyboard input
      * @return a command according to the input.
      */
@@ -49,12 +64,12 @@ public class CommandFactory {
         if (verb.equalsIgnoreCase("verbose")){
             return new VerboseCommand(noun);
         }
-        if (verb.equalsIgnoreCase("speak")) {
+        if (verb.equalsIgnoreCase("speak") && !parts[1].equalsIgnoreCase("to")) {
             return new SpeakCommand(noun);
         }
- //       if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to")) {
- //           return new SpeakCommand(parts[2]);
- //       }
+        if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to")) {
+            return new SpeakCommand(parts[2]);
+        }
         if (verb.equalsIgnoreCase("health")) {
             return new HealthCommand();
         }

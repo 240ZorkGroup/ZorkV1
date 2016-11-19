@@ -6,12 +6,24 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * The type Room.
+ */
 public class Room {
 
+    /**
+     * The type No room exception.
+     */
     class NoRoomException extends Exception {
     }
 
+    /**
+     * The Contents starter.
+     */
     static String CONTENTS_STARTER = "Contents: ";
+    /**
+     * The Npcs starter.
+     */
     static String NPCS_STARTER = "NPC: ";
 
     private String title;
@@ -21,11 +33,24 @@ public class Room {
     private ArrayList<Exit> exits;
     private ArrayList<NPC> npcs;
 
+    /**
+     * Instantiates a new Room.
+     *
+     * @param title the title
+     */
     Room(String title) {
         init();
         this.title = title;
     }
 
+    /**
+     * Instantiates a new Room.
+     *
+     * @param s the s
+     * @param d the d
+     * @throws NoRoomException               the no room exception
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
+     */
     Room(Scanner s, Dungeon d) throws NoRoomException,
             Dungeon.IllegalDungeonFormatException {
 
@@ -35,11 +60,12 @@ public class Room {
     /**
      * Given a Scanner object positioned at the beginning of a "room" file
      * entry, read and return a Room object representing it.
-     * @param d dungeon
+     *
+     * @param s         scanner
+     * @param d         dungeon
      * @param initState initState
-     * @param s scanner
-     * @throws Room.NoRoomException No room here
-     * @throws Dungeon.IllegalDungeonFormatException Illegal Dungeon File Format
+     * @throws NoRoomException               the no room exception
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
             Dungeon.IllegalDungeonFormatException {
@@ -102,15 +128,31 @@ public class Room {
         beenHere = false;
     }
 
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
     String getTitle() {
         return title;
     }
 
+    /**
+     * Sets desc.
+     *
+     * @param desc the desc
+     */
     void setDesc(String desc) {
         this.desc = desc;
     }
 
-    /*
+    /**
+     * Store state.
+     *
+     * @param w the w
+     * @throws IOException the io exception
+     */
+/*
      * Store the current (changeable) state of this room to the writer
      * passed.
      */
@@ -134,6 +176,13 @@ public class Room {
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
 
+    /**
+     * Restore state.
+     *
+     * @param s the s
+     * @param d the d
+     * @throws GameState.IllegalSaveFormatException the illegal save format exception
+     */
     void restoreState(Scanner s, Dungeon d) throws
             GameState.IllegalSaveFormatException {
 
@@ -159,6 +208,11 @@ public class Room {
         }
     }
 
+    /**
+     * Describe string.
+     *
+     * @return the string
+     */
     public String describe() {
         String description;
         if (beenHere) {
@@ -195,6 +249,12 @@ public class Room {
     }
 
 
+    /**
+     * Leave by room.
+     *
+     * @param dir the dir
+     * @return the room
+     */
     public Room leaveBy(String dir) {
         for (Exit exit : exits) {
             if (exit.getDir().equals(dir)) {
@@ -204,22 +264,49 @@ public class Room {
         return null;
     }
 
+    /**
+     * Add exit.
+     *
+     * @param exit the exit
+     */
     void addExit(Exit exit) {
         exits.add(exit);
     }
 
+    /**
+     * Add.
+     *
+     * @param item the item
+     */
     void add(Item item) {
         contents.add(item);
     }
 
+    /**
+     * Add.
+     *
+     * @param npc the npc
+     */
     void add(NPC npc) {
         npcs.add(npc);
     }
 
+    /**
+     * Remove.
+     *
+     * @param item the item
+     */
     void remove(Item item) {
         contents.remove(item);
     }
 
+    /**
+     * Gets item named.
+     *
+     * @param name the name
+     * @return the item named
+     * @throws Item.NoItemException the no item exception
+     */
     Item getItemNamed(String name) throws Item.NoItemException {
         for (Item item : contents) {
             if (item.goesBy(name)) {
@@ -229,6 +316,13 @@ public class Room {
         throw new Item.NoItemException();
     }
 
+    /**
+     * Gets npc named.
+     *
+     * @param name the name
+     * @return the npc named
+     * @throws NPC.NoNPCException the no npc exception
+     */
     NPC getNPCNamed(String name) throws NPC.NoNPCException {
         for (NPC npc : npcs) {
             if (npc.goesBy(name)) {
@@ -238,10 +332,20 @@ public class Room {
         throw new NPC.NoNPCException();
     }
 
+    /**
+     * Gets np cs.
+     *
+     * @return the np cs
+     */
     ArrayList<NPC> getNPCs() {
         return npcs;
     }
 
+    /**
+     * Gets contents.
+     *
+     * @return the contents
+     */
     ArrayList<Item> getContents() {
         return contents;
     }

@@ -1,10 +1,18 @@
 
 //package zeitz_borkv3;
 
+/**
+ * The type Take command.
+ */
 class TakeCommand extends Command {
 
     private String itemName;
 
+    /**
+     * Instantiates a new Take command.
+     *
+     * @param itemName the item name
+     */
     TakeCommand(String itemName) {
         this.itemName = itemName;
     }

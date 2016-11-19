@@ -11,26 +11,59 @@ import java.io.PrintWriter;
 
 /**
  * GameState - Keeps track of the current state of the game.
+ *
  * @author Billy Andrews, Maryfay Jackson, Kelly Morgan
  * @version 20161107
  */
 public class GameState {
 
+    /**
+     * The type Illegal save format exception.
+     */
     public static class IllegalSaveFormatException extends Exception {
+        /**
+         * Instantiates a new Illegal save format exception.
+         *
+         * @param e the e
+         */
         public IllegalSaveFormatException(String e) {
             super(e);
         }
     }
 
+    /**
+     * The Default save file.
+     */
     static String DEFAULT_SAVE_FILE = "bork_save";
+    /**
+     * The Save file extension.
+     */
     static String SAVE_FILE_EXTENSION = ".sav";
+    /**
+     * The Save file version.
+     */
     static String SAVE_FILE_VERSION = "Bork v3.0 save data";
 
+    /**
+     * The Adventurer marker.
+     */
     static String ADVENTURER_MARKER = "Adventurer:";
+    /**
+     * The Current room leader.
+     */
     static String CURRENT_ROOM_LEADER = "Current room: ";
+    /**
+     * The Inventory leader.
+     */
     static String INVENTORY_LEADER = "Inventory: ";
 
+    /**
+     * The Score.
+     */
     static int score = 0;
+    /**
+     * The Health.
+     */
     static int health = 100;
 
     private static GameState theInstance;
@@ -41,6 +74,7 @@ public class GameState {
 
     /**
      * The Instance.
+     *
      * @return GameState theInstance - returns the current state of the game, including room, inventory, etc.
      */
     static synchronized GameState instance() {
@@ -59,10 +93,11 @@ public class GameState {
 
     /**
      * restore
+     *
      * @param filename - denotes which file the game should read from (.bork or .sav)
-     * @throws FileNotFoundException - file not found
-     * @throws IllegalSaveFormatException - illegal save format
-     * @throws Dungeon.IllegalDungeonFormatException - illegal dungeon format
+     * @throws FileNotFoundException         - file not found
+     * @throws IllegalSaveFormatException    - illegal save format
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
      */
     void restore(String filename) throws FileNotFoundException,
         IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
@@ -106,6 +141,7 @@ public class GameState {
 
     /**
      * store - Saves the game's progress
+     *
      * @throws IOException - Thrown if the game cannot save.
      */
     void store() throws IOException {
@@ -114,6 +150,7 @@ public class GameState {
 
     /**
      * store - Saves the game's progress.
+     *
      * @param saveName - the filename
      * @throws IOException - thrown if the game cannot save.
      */
@@ -134,11 +171,21 @@ public class GameState {
         w.close();
     }
 
+    /**
+     * Initialize.
+     *
+     * @param dungeon the dungeon
+     */
     void initialize(Dungeon dungeon) {
         this.dungeon = dungeon;
         adventurersCurrentRoom = dungeon.getEntry();
     }
 
+    /**
+     * Gets inventory names.
+     *
+     * @return the inventory names
+     */
     ArrayList<String> getInventoryNames() {
         ArrayList<String> names = new ArrayList<String>();
         for (Item item : inventory) {
@@ -147,14 +194,31 @@ public class GameState {
         return names;
     }
 
+    /**
+     * Add to inventory.
+     *
+     * @param item the item
+     */
     void addToInventory(Item item) /* throws TooHeavyException */ {
         inventory.add(item);
     }
 
+    /**
+     * Remove from inventory.
+     *
+     * @param item the item
+     */
     void removeFromInventory(Item item) {
         inventory.remove(item);
     }
 
+    /**
+     * Gets item in vicinity named.
+     *
+     * @param name the name
+     * @return the item in vicinity named
+     * @throws Item.NoItemException the no item exception
+     */
     Item getItemInVicinityNamed(String name) throws Item.NoItemException {
 
         // First, check inventory.
@@ -174,6 +238,13 @@ public class GameState {
         throw new Item.NoItemException();
     }
 
+    /**
+     * Gets item from inventory named.
+     *
+     * @param name the name
+     * @return the item from inventory named
+     * @throws Item.NoItemException the no item exception
+     */
     Item getItemFromInventoryNamed(String name) throws Item.NoItemException {
 
         for (Item item : inventory) {
@@ -184,20 +255,36 @@ public class GameState {
         throw new Item.NoItemException();
     }
 
+    /**
+     * Gets adventurers current room.
+     *
+     * @return the adventurers current room
+     */
     Room getAdventurersCurrentRoom() {
         return adventurersCurrentRoom;
     }
 
+    /**
+     * Sets adventurers current room.
+     *
+     * @param room the room
+     */
     void setAdventurersCurrentRoom(Room room) {
         adventurersCurrentRoom = room;
     }
 
+    /**
+     * Gets dungeon.
+     *
+     * @return the dungeon
+     */
     Dungeon getDungeon() {
         return dungeon;
     }
 
     /**
      * getHealth - Retrieves the player's current health points, based on a 0-100 scale.
+     *
      * @return the player's health points.
      */
     int getHealth(){
@@ -213,6 +300,7 @@ public class GameState {
 
     /**
      * setHealth - Sets the player's health.
+     *
      * @param healthPoints the amount of health points to be added. Can be negative to subtract points.
      */
     void setHealth(int healthPoints){
@@ -221,6 +309,7 @@ public class GameState {
 
     /**
      * getScore - Retrieves the player's current score.
+     *
      * @return returns the score
      */
     int getScore(){
@@ -229,6 +318,7 @@ public class GameState {
 
     /**
      * setScore - Sets the player's score.
+     *
      * @param points the amount of points to be added. Can be negative to subtract points.
      */
     void setScore(int points){
@@ -239,9 +329,10 @@ public class GameState {
     /**
      * Wound
      * Wounds the player's health. If the player's health gets too low, they will die.
+     *
      * @param hp the number of points to deduct from the player's health. Using a negative number will "heal" the player.
      */
-    void wound(int hp){
+    void wound(int hp){ //TODO Something weird going on with this. It takes away health when it's supposed to add. Making it add makes it not work correctly.
         setHealth(hp);
         if (health <= 0){
             die();
@@ -272,8 +363,9 @@ public class GameState {
     /**
      * Disappear
      * Makes an item cease to exist by removing it from the room, inventory, and dungeon.
+     *
      * @param item will be deleted globally.
-     * @throws Item.NoItemException if the item does not exist.
+     * @throws Item.NoItemException the no item exception
      */
     void disappear(Item item) throws Item.NoItemException {
         inventory.remove(item); // inventory
@@ -281,18 +373,6 @@ public class GameState {
         dungeon.remove(item);// dungeon
     }
 
-
-//    /**
-//     * Transform
-//     * @param item1 Item to disappear (disappear()).
-//     * @param item2 Item to replace item1.
-//     * @throws Item.NoItemException if the item does not exist.
-//     */
-//    void transform(Item item1, Item item2) throws Item.NoItemException {
-//        GameState.instance().disappear(item1);
-//        dungeon.add(item2);// dungeon   //TODO this might be wrong.
-//        GameState.instance().addToInventory(item2); // inventory
-//    }
 
     /**
      * Teleport
