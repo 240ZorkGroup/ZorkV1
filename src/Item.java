@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Hashtable;
 
+/**
+ * The type Item.
+ */
 public class Item {
 
+    /**
+     * The type No item exception.
+     */
     static class NoItemException extends Exception {
     }
 
@@ -20,8 +26,8 @@ public class Item {
      * Item - added functionality of events for each specific-item command.
      *
      * @param s The scanner that reads from the file.
-     * @throws NoItemException                       - no more items
-     * @throws Dungeon.IllegalDungeonFormatException - illegal dungeon format
+     * @throws NoItemException               - no more items
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
      */
     Item(Scanner s) throws NoItemException,
             Dungeon.IllegalDungeonFormatException {
@@ -79,15 +85,32 @@ public class Item {
         }
     }
 
+    /**
+     * Goes by boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     boolean goesBy(String name) {
         // could have other aliases
         return this.primaryName.equals(name);
     }
 
+    /**
+     * Gets primary name.
+     *
+     * @return the primary name
+     */
     String getPrimaryName() {
         return primaryName;
     }
 
+    /**
+     * Gets message for verb.
+     *
+     * @param verb the verb
+     * @return the message for verb
+     */
     public String getMessageForVerb(String verb) {
         return messages.get(verb);
     }
@@ -96,18 +119,30 @@ public class Item {
         return primaryName;
     }
 
+    /**
+     * Gets weight.
+     *
+     * @return the weight
+     */
     public int getWeight() {
         return weight;
     }
 
+    /**
+     * Gets event for verb.
+     *
+     * @param verbsWithEvents the verbs with events
+     * @return the event for verb
+     */
     public ArrayList<String> getEventForVerb(String verbsWithEvents) {
         return events.get(verbsWithEvents);
     }
 
     /**
      * Transform
+     *
      * @param item Item to replace this item.
-     * @throws Item.NoItemException if the item does not exist.
+     * @throws NoItemException the no item exception
      */
     void transform(Item item) throws Item.NoItemException {
         GameState.instance().getDungeon().add(item);// dungeon   //TODO this might be wrong.

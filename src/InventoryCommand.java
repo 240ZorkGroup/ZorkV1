@@ -3,8 +3,14 @@
 
 import java.util.ArrayList;
 
+/**
+ * The type Inventory command.
+ */
 class InventoryCommand extends Command {
 
+    /**
+     * Instantiates a new Inventory command.
+     */
     InventoryCommand() {
     }
 

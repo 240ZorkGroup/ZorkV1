@@ -3,11 +3,15 @@
 
 /**
  * Health Command displays the health message pertaining to the player's health.
+ *
  * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
  * @version 20161109
  */
 class HealthCommand extends Command {
 
+    /**
+     * The Health.
+     */
     int health;
 
     /**

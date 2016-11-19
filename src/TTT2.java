@@ -11,8 +11,9 @@ import static java.awt.Color.BLACK;
  */
 
 
-
 /**
+ * The type Ttt 2.
+ *
  * @author Billy Andrews
  */
 public class TTT2 extends JFrame implements ActionListener {
@@ -26,18 +27,46 @@ public class TTT2 extends JFrame implements ActionListener {
     private static int playerXScore = 0;
     private static int playerOScore = 0;
     private static int playerTScore = 0;
+    /**
+     * The But 1.
+     */
     static char but1 = '\u0000';
+    /**
+     * The But 2.
+     */
     static char but2 = '\u0000';
+    /**
+     * The But 3.
+     */
     static char but3 = '\u0000';
+    /**
+     * The But 4.
+     */
     static char but4 = '\u0000';
+    /**
+     * The But 5.
+     */
     static char but5 = '\u0000';
+    /**
+     * The But 6.
+     */
     static char but6 = '\u0000';
+    /**
+     * The But 7.
+     */
     static char but7 = '\u0000';
+    /**
+     * The But 8.
+     */
     static char but8 = '\u0000';
+    /**
+     * The But 9.
+     */
     static char but9 = '\u0000';
 
     /**
      * Constructor for TTT2
+     *
      * @param mName the monster's name
      * @param pName the player's name
      */
@@ -302,14 +331,12 @@ public class TTT2 extends JFrame implements ActionListener {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-
-
     /**
      * COMPUTER, GO!
-     *
+     * <p>
      * The code for when it's the computer's turn. An excessively long algorithm I created.
      */
-    public void computerGo() {
+    void computerGo() {
         String[] buttonListStrings = {jButton1.getText(), jButton2.getText(), jButton3.getText(),
                 jButton4.getText(), jButton5.getText(), jButton6.getText(),
                 jButton7.getText(), jButton8.getText(), jButton9.getText()};
@@ -695,7 +722,7 @@ public class TTT2 extends JFrame implements ActionListener {
     /**
      * Keeps track of who's turn it is.
      */
-    public void changeFirstPlayer() {
+    void changeFirstPlayer() {
         if (xGoesFirst) {
             xGoesFirst = false;
         } else {
@@ -706,7 +733,7 @@ public class TTT2 extends JFrame implements ActionListener {
     /**
      * Changes the button's colors if triple is a winner
      */
-    public void changeButtonColor() {
+    void changeButtonColor() {
         if (but1 == 'x' && but2 == 'x' && but3 == 'x') {
             jButton1.setForeground(RED);
             jButton2.setForeground(RED);
@@ -777,7 +804,7 @@ public class TTT2 extends JFrame implements ActionListener {
     /**
      * Disables the board's buttons.
      */
-    public void disableButtons() {
+    private void disableButtons() {
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
@@ -1268,13 +1295,12 @@ public class TTT2 extends JFrame implements ActionListener {
     }//GEN-LAST:event_jButton9ActionPerformed
 
 
-
     /**
      * This method checks to see if there has been a draw.
      *
      * @return if the board is full but no winner.
      */
-    public static boolean full() {
+    static boolean full() {
         if (but1 != '\u0000' && but2 != '\u0000' && but3 != '\u0000'
                 && but4 != '\u0000' && but5 != '\u0000' && but6 != '\u0000'
                 && but7 != '\u0000' && but8 != '\u0000' && but9 != '\u0000') {
@@ -1289,7 +1315,7 @@ public class TTT2 extends JFrame implements ActionListener {
      *
      * @return if X has won
      */
-    public static boolean playerXWin() {
+    static boolean playerXWin() {
         if (but1 == 'x' && but2 == 'x' && but3 == 'x'
                 || but4 == 'x' && but5 == 'x' && but6 == 'x'
                 || but7 == 'x' && but8 == 'x' && but9 == 'x'
@@ -1309,7 +1335,7 @@ public class TTT2 extends JFrame implements ActionListener {
      *
      * @return if O has won
      */
-    public static boolean playerOWin() {
+    static boolean playerOWin() {
         if (but1 == 'o' && but2 == 'o' && but3 == 'o'
                 || but4 == 'o' && but5 == 'o' && but6 == 'o'
                 || but7 == 'o' && but8 == 'o' && but9 == 'o'
@@ -1324,44 +1350,6 @@ public class TTT2 extends JFrame implements ActionListener {
         }
     }
 
-//    /**
-//     * The Main Method.
-//     *
-//     * @param args the command line arguments
-//     */
-//    public static void main(String[] args) {
-//
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(TTT2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new TTT2(this.g.monsterName,this.playerName).setVisible(true);
-//            }
-//        });
-//    }
 
     /**
      * Invoked when an action occurs.

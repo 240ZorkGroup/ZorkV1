@@ -2,12 +2,15 @@
 
 /**
  * Score Command
+ *
  * @author Billy Andrews, Maryfay Jackson, Kelly Morgan
  * @version 20161107
  */
-
 class ScoreCommand extends Command {
 
+    /**
+     * The Score.
+     */
     int score = 7;
 
     /**

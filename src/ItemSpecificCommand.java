@@ -3,6 +3,9 @@
 
 import java.util.ArrayList;
 
+/**
+ * The type Item specific command.
+ */
 class ItemSpecificCommand extends Command {
 
     private String verb;
@@ -11,6 +14,12 @@ class ItemSpecificCommand extends Command {
     private int nums;
 
 
+    /**
+     * Instantiates a new Item specific command.
+     *
+     * @param verb the verb
+     * @param noun the noun
+     */
     ItemSpecificCommand(String verb, String noun) {
         this.verb = verb;
         this.noun = noun;
@@ -31,7 +40,7 @@ class ItemSpecificCommand extends Command {
          * This part needs a switch, but also needs some kind of hashtable to process what is being "kicked"
          * and the consequences for doing so. When you kick the can, you are not harmed. If you kick the bomb, you are wounded, etc.
          */
-        //TODO switch for ItemSpecificCommands
+        // switch for ItemSpecificCommands
         ArrayList<String> events = itemReferredTo.getEventForVerb(verb);
         for (String evt : events) {
             if (evt.contains("(")) {
@@ -56,18 +65,18 @@ class ItemSpecificCommand extends Command {
                     case "drink":
                         if (noun.equals("DrPepper")) {
                             try {
-                                itemReferredTo.transform(GameState.instance().getDungeon().getItems().get("emptyCan")); //emptyCan
+                                itemReferredTo.transform(GameState.instance().getDungeon().getItems().get("emptyCan"));
                             } catch (Item.NoItemException e) {
                                 e.printStackTrace();
                             }
                             GameState.instance().wound(-1);
-                            System.out.print("You were just wounded.");  //TODO For some reason, everything passes through twice because this prints twice when called.
+                            System.out.print("You were just wounded.\nFigure out why this repeats." );  //TODO For some reason, everything passes through twice because this prints twice when called.
                         }
                         break;
                     case "stomp":
                         if (noun.equals("emptyCan")) {
                             try {
-                                itemReferredTo.transform(GameState.instance().getDungeon().getItems().get("squishedCan")); //emptyCan
+                                itemReferredTo.transform(GameState.instance().getDungeon().getItems().get("squishedCan"));
                             } catch (Item.NoItemException e) {
                                 e.printStackTrace();
                             }

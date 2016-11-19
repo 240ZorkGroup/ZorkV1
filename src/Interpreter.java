@@ -4,14 +4,25 @@
 import java.util.Scanner;
 
 
+/**
+ * The type Interpreter.
+ */
 public class Interpreter {
 
     private static GameState state; // not strictly necessary; GameState is 
                                     // singleton
 
-    public static String USAGE_MSG = 
+    /**
+     * The constant USAGE_MSG.
+     */
+    public static String USAGE_MSG =
         "Usage: Interpreter borkFile.bork|saveFile.sav.";
 
+    /**
+     * Main.
+     *
+     * @param args the args
+     */
     public static void main(String args[]) {
 
         if (args.length < 1) {
