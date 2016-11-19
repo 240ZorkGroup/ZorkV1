@@ -8,12 +8,13 @@
  */
 class HealthCommand extends Command {
 
-    int health = 100;
+    int health;
 
     /**
      * Constructor for HealthCommand creates a healthcommand with full life.
      */
     HealthCommand() {
+        this.health = GameState.instance().getHealth();
     }
 
 

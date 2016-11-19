@@ -12,7 +12,7 @@ public class Room {
     }
 
     static String CONTENTS_STARTER = "Contents: ";
-    static String NPCS_STARTER = "NPCs: ";
+    static String NPCS_STARTER = "NPC: ";
 
     private String title;
     private String desc;
@@ -63,7 +63,8 @@ public class Room {
                                 "No such item '" + itemName + "'");
                     }
                 }
-            } else if (lineOfDesc.startsWith(NPCS_STARTER)) {
+            }
+            if (lineOfDesc.startsWith(NPCS_STARTER)) {
                 String npcList = lineOfDesc.substring(NPCS_STARTER.length());
                 String[] npcNames = npcList.split(",");
                 for (String npcName : npcNames) {
