@@ -49,6 +49,9 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it.
+     * @param filename The file you want to load from.
+     * @throws IllegalDungeonFormatException Illegal Dungeon file format
+     * @throws FileNotFoundException File not found
      */
     public Dungeon(String filename) throws FileNotFoundException, 
         IllegalDungeonFormatException {
@@ -59,6 +62,10 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it, including (possibly) the items in their original locations.
+     * @param filename The file you want to load from
+     * @param initState true
+     * @throws FileNotFoundException File not found.
+     * @throws IllegalDungeonFormatException Illegal dungeon file format
      */
     public Dungeon(String filename, boolean initState) 
         throws FileNotFoundException, IllegalDungeonFormatException {
@@ -230,6 +237,9 @@ public class Dungeon {
      * Get the Item object whose primary name is passed. This has nothing to
      * do with where the Adventurer might be, or what's in his/her inventory,
      * etc.
+     * @throws Item.NoItemException No Item Exception
+     * @param primaryItemName the item name that you want to get.
+     * @return item
      */
     public Item getItem(String primaryItemName) throws Item.NoItemException {
         
@@ -239,6 +249,12 @@ public class Dungeon {
         return items.get(primaryItemName);
     }
 
+    /**
+     * Get the NPC whose name is passed.
+     * @param primaryNPCName The primary name of the NPC you want to get.
+     * @return NPC
+     * @throws NPC.NoNPCException There is no NPC here
+     */
     public NPC getNPC(String primaryNPCName) throws NPC.NoNPCException {
         if (npcs.get(primaryNPCName) == null) {
             throw new NPC.NoNPCException();

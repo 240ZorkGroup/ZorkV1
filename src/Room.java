@@ -35,6 +35,11 @@ public class Room {
     /**
      * Given a Scanner object positioned at the beginning of a "room" file
      * entry, read and return a Room object representing it.
+     * @param d dungeon
+     * @param initState initState
+     * @param s scanner
+     * @throws Room.NoRoomException No room here
+     * @throws Dungeon.IllegalDungeonFormatException Illegal Dungeon File Format
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
             Dungeon.IllegalDungeonFormatException {

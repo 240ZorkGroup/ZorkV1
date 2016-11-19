@@ -12,6 +12,7 @@ class SpeakCommand extends Command {
 
     /**
      * Constructor for HealthCommand creates a healthcommand with full life.
+     * @param noun the noun
      */
     SpeakCommand(String noun) {
         this.noun = noun;

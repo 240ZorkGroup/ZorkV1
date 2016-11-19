@@ -10,6 +10,7 @@
 
     /**
      * Constructor for VerboseCommand.
+     * @param command the command
      */
         VerboseCommand(String command) {
             this.command = command;

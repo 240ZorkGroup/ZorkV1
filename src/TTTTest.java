@@ -7,7 +7,7 @@ public class TTTTest {
 
     /**
      * Main Tester class
-     * @param args
+     * @param args Main args
      */
 
     public static void main(String[] args){

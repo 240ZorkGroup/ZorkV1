@@ -3,7 +3,7 @@
 /**
  * Score Command
  * @author Billy Andrews, Maryfay Jackson, Kelly Morgan
- * @date 20161107
+ * @version 20161107
  */
 
 class ScoreCommand extends Command {
