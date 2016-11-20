@@ -67,8 +67,11 @@ public class CommandFactory {
         if (verb.equalsIgnoreCase("speak") && !parts[1].equalsIgnoreCase("to")) {
             return new SpeakCommand(noun);
         }
-        if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to")) {
+        if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to") && !parts[2].equalsIgnoreCase("the")) {
             return new SpeakCommand(parts[2]);
+        }
+        if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to") && parts[2].equalsIgnoreCase("the")) {
+            return new SpeakCommand(parts[3]);
         }
         if (verb.equalsIgnoreCase("health")) {
             return new HealthCommand();

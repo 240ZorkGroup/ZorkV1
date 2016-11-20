@@ -48,7 +48,7 @@ public class Room {
      *
      * @param s the s
      * @param d the d
-     * @throws NoRoomException               the no room exception
+     * @throws NoRoomException                       the no room exception
      * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
      */
     Room(Scanner s, Dungeon d) throws NoRoomException,
@@ -64,7 +64,7 @@ public class Room {
      * @param s         scanner
      * @param d         dungeon
      * @param initState initState
-     * @throws NoRoomException               the no room exception
+     * @throws NoRoomException                       the no room exception
      * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
@@ -169,7 +169,7 @@ public class Room {
         if (npcs.size() > 0) { // NPCs in Room
             w.print(NPCS_STARTER);
             for (int i = 0; i < npcs.size() - 1; i++) {
-                w.print(npcs.get(i) + ",");
+                w.print(npcs.get(i).getMonsterName() + ",");
             }
             w.println(npcs.get(npcs.size() - 1));
         }
@@ -200,8 +200,19 @@ public class Room {
                 try {
                     add(d.getItem(itemName));
                 } catch (Item.NoItemException e) {
-                    throw new GameState.IllegalSaveFormatException(
-                            "No such item '" + itemName + "'");
+                    throw new GameState.IllegalSaveFormatException("No such item '" + itemName + "'");
+                }
+            }
+            s.nextLine();  // Consume "---".
+        }
+        if (line.startsWith(NPCS_STARTER)) {
+            String npcsList = line.substring(NPCS_STARTER.length());
+            String[] npcsNames = npcsList.split(",");
+            for (String npcsName : npcsNames) {
+                try {
+                    add(d.getNPC(npcsName));
+                } catch (NPC.NoNPCException e) {
+                    throw new GameState.IllegalSaveFormatException("No such NPC '" + npcsName + "'");
                 }
             }
             s.nextLine();  // Consume "---".
@@ -230,7 +241,7 @@ public class Room {
         }
 
         for (NPC npc : npcs) {
-            description += "\n" + npc.getMonsterName() + " is in here.";
+            description += "\n" + npc.getMonsterName() + " is in here. You can speak to it.";
         }
 
         if (npcs.size() > 0) {
