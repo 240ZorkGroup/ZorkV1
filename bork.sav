@@ -1,0 +1,29 @@
+Bork v3.0 save data
+Dungeon file: trinkleG3a_updated.bork
+Room states:
+Stephen's office:
+beenHere=false
+Contents: StarWarsToy,WawaTravelMug,donut
+---
+Room B6:
+beenHere=false
+NPC: Grue
+---
+Basement hallway:
+beenHere=false
+Contents: DrPepper
+---
+Room B13:
+beenHere=false
+Contents: Bomb
+---
+Rotunda balcony:
+beenHere=false
+Contents: chainsaw,magicWand
+---
+Rotunda:
+beenHere=true
+---
+===
+Adventurer:
+Current room: Rotunda

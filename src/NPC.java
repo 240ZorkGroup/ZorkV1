@@ -35,6 +35,7 @@ public class NPC {
      */
     NPC(String n){
         this.monsterName = n;
+        this.playerName = "Player1";
     }
 
     /**
@@ -70,7 +71,10 @@ public class NPC {
 
         System.out.print("     " + monsterName + ": So what do you say? A quick game of Tic-Tac-Toe? (y/n): ");
         String answer = in.nextLine();
-        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) { // Wants to play Tic Tac Toe
+        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("ye")
+                || answer.equalsIgnoreCase("yea") || answer.equalsIgnoreCase("yeah") || answer.equalsIgnoreCase("yup")
+                || answer.equalsIgnoreCase("yep") || answer.equalsIgnoreCase("sure") || answer.equalsIgnoreCase("okay") || answer.equalsIgnoreCase("ok")
+                || answer.equalsIgnoreCase("absolutely")) { // Wants to play Tic Tac Toe
             System.out.print("     " + monsterName + ": Great! I don't think I caught your name. (enter your name): ");
             String name = in.nextLine();
             System.out.println();
@@ -84,7 +88,7 @@ public class NPC {
             tictactoe.setVisible(true);
 
         } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")){ // Doesn't want to play Tic Tac Toe.
-            System.out.println("     " + playerName + ": I don't have time for that right now.");
+            System.out.println("\n     You: I don't have time for that right now.");
             System.out.println("     " + monsterName + ": Maybe next time.");
             System.out.println();
         } else {
@@ -101,6 +105,10 @@ public class NPC {
     boolean goesBy(String name) {
         // could have other aliases
         return this.monsterName.equals(name);
+    }
+
+    public String toString() {
+        return monsterName;
     }
 
 

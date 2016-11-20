@@ -46,14 +46,10 @@ public class Item {
 
         // Read and parse verbs lines, as long as there are more.
         String verbLine = s.nextLine();
-        System.out.println(primaryName);                                                        // TODO Debug/Testing print lines.
         while (!verbLine.equals(Dungeon.SECOND_LEVEL_DELIM)) {
             if (verbLine.equals(Dungeon.TOP_LEVEL_DELIM)) {
                 throw new Dungeon.IllegalDungeonFormatException("No '" + Dungeon.SECOND_LEVEL_DELIM + "' after item.");
             }
-
-
-            //TODO finish the itemSpecificCommands with EVENTS.
 
             String[] verbParts = verbLine.split(":");                                       // Splits original string
             if (verbParts[0].contains("[")) {                                               // If there is an event for the itemSpecificCommand:
@@ -65,7 +61,6 @@ public class Item {
                     String[] eventMessages = event.split(",");                              // Split the events up and put them in String[] "eventMessages"
                     ArrayList<String> eventsList = new ArrayList<String>();
                     for (String ele : eventMessages){                                       // for each element in String[] "eventMessages"
-                        System.out.println(" - " + command + " : " + ele);                                            // TODO Debug/Testing print lines.
                         eventsList.add(ele);
                         events.put(command, eventsList);                                    // Put the command and element in the Hashtable "events" (for all elements)
                     }
@@ -73,12 +68,10 @@ public class Item {
                 } else {
                     ArrayList<String> eventsList = new ArrayList<String>();         // If there is only one event:
                     eventsList.add(event);
-                    System.out.println(" - " + command + " : " + event);                                            // TODO Debug/Testing print lines.
                     events.put(command, eventsList);                                        // Put the command and the event in Hashtable "events".
                 }
 
             } else {                                                                // If there are no events:
-                System.out.println(" - " + verbParts[0]);                                            // TODO Debug/Testing print lines.
                 messages.put(verbParts[0], verbParts[1]);                                   // Put the command and message in "messages"
             }
             verbLine = s.nextLine();
@@ -145,7 +138,7 @@ public class Item {
      * @throws NoItemException the no item exception
      */
     void transform(Item item) throws Item.NoItemException {
-        GameState.instance().getDungeon().add(item);// dungeon   //TODO this might be wrong.
+        GameState.instance().getDungeon().add(item);// dungeon
         GameState.instance().addToInventory(item); // inventory
         GameState.instance().disappear(this);
     }
