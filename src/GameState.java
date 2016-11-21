@@ -1,6 +1,7 @@
 
 //package zeitz_borkv3;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
@@ -31,6 +32,13 @@ public class GameState {
         }
     }
 
+    /**
+     * Time of day - 0 = day / 1 = night
+     */
+    static boolean dayTime;
+    /**
+     *  Movement Counter - counts the amounts of movement commands given. Used to set the time of day.
+     */
     /**
      * The Default save file.
      */
@@ -102,12 +110,12 @@ public class GameState {
      * restore
      *
      * @param filename - denotes which file the game should read from (.bork or .sav)
-     * @throws FileNotFoundException         - file not found
-     * @throws IllegalSaveFormatException    - illegal save format
+     * @throws FileNotFoundException                 - file not found
+     * @throws IllegalSaveFormatException            - illegal save format
      * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
      */
     void restore(String filename) throws FileNotFoundException,
-        IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
+            IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
 
         Scanner s = new Scanner(new FileReader(filename));
 
@@ -122,16 +130,16 @@ public class GameState {
         }
 
         dungeon = new Dungeon(dungeonFileLine.substring(
-            Dungeon.FILENAME_LEADER.length()), false);
+                Dungeon.FILENAME_LEADER.length()), false);
         dungeon.restoreState(s);
 
         s.nextLine();  // Throw away "Adventurer:".
         String currentRoomLine = s.nextLine();
         adventurersCurrentRoom = dungeon.getRoom(
-            currentRoomLine.substring(CURRENT_ROOM_LEADER.length()));
+                currentRoomLine.substring(CURRENT_ROOM_LEADER.length()));
         if (s.hasNext()) {
             String inventoryList = s.nextLine().substring(
-                INVENTORY_LEADER.length());
+                    INVENTORY_LEADER.length());
             String[] inventoryItems = inventoryList.split(",");
             for (String itemName : inventoryItems) {
                 try {
@@ -142,11 +150,13 @@ public class GameState {
             }
         }
         if (s.hasNext()) { // SCORE
-            String number = s.nextLine().substring(SCORE_LEADER.length());;
+            String number = s.nextLine().substring(SCORE_LEADER.length());
+            ;
             this.score = Integer.parseInt(number);
         }
         if (s.hasNext()) { // HEALTH
-            String number = s.nextLine().substring(HEALTH_LEADER.length());;
+            String number = s.nextLine().substring(HEALTH_LEADER.length());
+            ;
             this.health = Integer.parseInt(number);
         }
     }
@@ -175,10 +185,10 @@ public class GameState {
         w.println(CURRENT_ROOM_LEADER + adventurersCurrentRoom.getTitle());
         if (inventory.size() > 0) {
             w.print(INVENTORY_LEADER);
-            for (int i=0; i<inventory.size()-1; i++) {
+            for (int i = 0; i < inventory.size() - 1; i++) {
                 w.print(inventory.get(i).getPrimaryName() + ",");
             }
-            w.println(inventory.get(inventory.size()-1).getPrimaryName());
+            w.println(inventory.get(inventory.size() - 1).getPrimaryName());
         }
         w.println(SCORE_LEADER + this.score);
         w.println(HEALTH_LEADER + this.health);
@@ -302,14 +312,14 @@ public class GameState {
      *
      * @return the player's health points.
      */
-    int getHealth(){
+    int getHealth() {
         return health;
     }
 
     /**
      * depleteHunger - As the player traverses the dungeon, his hunger takes a toll and subtracts 1 point per movement command.
      */
-    void depleteHunger(){
+    void depleteHunger() {
         health = health - 1;
     }
 
@@ -318,7 +328,7 @@ public class GameState {
      *
      * @param healthPoints the amount of health points to be added. Can be negative to subtract points.
      */
-    void setHealth(int healthPoints){
+    void setHealth(int healthPoints) {
         this.health = health + healthPoints;
     }
 
@@ -327,7 +337,7 @@ public class GameState {
      *
      * @return returns the score
      */
-    int getScore(){
+    int getScore() {
         return score;
     }
 
@@ -336,7 +346,7 @@ public class GameState {
      *
      * @param points the amount of points to be added. Can be negative to subtract points.
      */
-    void setScore(int points){
+    void setScore(int points) {
         this.score = score + points;
     }
 
@@ -347,9 +357,9 @@ public class GameState {
      *
      * @param hp the number of points to deduct from the player's health. Using a negative number will "heal" the player.
      */
-    void wound(int hp){ //TODO Something weird going on with this. It takes away health when it's supposed to add. Making it add makes it not work correctly.
+    void wound(int hp) { //TODO Something weird going on with this. It takes away health when it's supposed to add. Making it add makes it not work correctly.
         setHealth(hp);
-        if (health <= 0){
+        if (health <= 0) {
             die();
         }
     }
@@ -358,7 +368,7 @@ public class GameState {
      * Die
      * The player loses and the game ends.
      */
-    void die(){
+    void die() {
         System.out.println("YOU LOST!");
         System.out.println("GAME OVER");
         System.exit(0);
@@ -368,7 +378,7 @@ public class GameState {
      * Win
      * The player wins and the game ends.
      */
-    void win(){
+    void win() {
         System.out.println("YOU WON!");
         System.out.println("GAME OVER");
         System.exit(0);
@@ -393,9 +403,31 @@ public class GameState {
      * Teleport
      * Sets the adventurers current room to a random room generated by the Dungeon class.
      */
-    void teleport(){
+    void teleport() {
         setAdventurersCurrentRoom(dungeon.getRandomRoom());
 
+    }
+
+    /**
+     * getTimeOfDay
+     *
+     * @return TimeOfDay. false = night-time / true = day-time.
+     */
+    boolean getTimeOfDay() {
+        return dayTime;
+    }
+
+    /**
+     * changeTimeOfDay
+     */
+    void changeTimeOfDay() {
+        if (dayTime == false) {
+            System.out.println("\n --- It is now day-time outside ---");
+            dayTime = true;
+        } else if (dayTime == true) {
+            System.out.println("\n --- It is now night-time outside ---");
+            dayTime = false;
+        }
     }
 
 }
