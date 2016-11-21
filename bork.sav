@@ -6,12 +6,11 @@ beenHere=false
 Contents: StarWarsToy,WawaTravelMug,donut
 ---
 Room B6:
-beenHere=false
+beenHere=true
 NPC: Grue
 ---
 Basement hallway:
-beenHere=false
-Contents: DrPepper
+beenHere=true
 ---
 Room B13:
 beenHere=false
@@ -26,4 +25,7 @@ beenHere=true
 ---
 ===
 Adventurer:
-Current room: Rotunda
+Current room: Room B6
+Inventory: DrPepper
+Score: 100
+Health: 99
