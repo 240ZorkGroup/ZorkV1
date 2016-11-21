@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * TIC TAC TOE! This is a tester class to just play the Tic Tac Toe GUI game.
  *
@@ -12,7 +14,7 @@ public class TTTTest {
      * @param args Main args
      */
     public static void main(String[] args){
-        NPC grue = new NPC("GRUE");
-        grue.converse();
+        //LocalDateTime rightNow = LocalDateTime.now();
+        //System.out.println(rightNow/12);
     }
 }

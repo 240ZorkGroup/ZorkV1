@@ -18,6 +18,7 @@ public class CommandFactory {
      * The Count.
      */
     static int count;
+    private static int movementCount = 0;
     private static CommandFactory theInstance;
     /**
      * The Movement commands.
@@ -87,6 +88,12 @@ public class CommandFactory {
             return new InventoryCommand();
         }
         if (MOVEMENT_COMMANDS.contains(verb)) {
+            //TODO make every so-many-moves makes the time of day change (day/night)
+            if (movementCount == 4) {
+                GameState.instance().changeTimeOfDay();
+                movementCount = 0;
+            }
+            movementCount++;
             GameState.instance().depleteHunger();
             return new MovementCommand(verb);
         }
