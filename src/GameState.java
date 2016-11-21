@@ -56,7 +56,14 @@ public class GameState {
      * The Inventory leader.
      */
     static String INVENTORY_LEADER = "Inventory: ";
-
+    /**
+     * The Score leader.
+     */
+    static String SCORE_LEADER = "Score: ";
+    /**
+     * The Health leader.
+     */
+    static String HEALTH_LEADER = "Health: ";
     /**
      * The Score.
      */
@@ -111,9 +118,7 @@ public class GameState {
         String dungeonFileLine = s.nextLine();
 
         if (!dungeonFileLine.startsWith(Dungeon.FILENAME_LEADER)) {
-            throw new IllegalSaveFormatException("No '" +
-                Dungeon.FILENAME_LEADER + 
-                "' after version indicator.");
+            throw new IllegalSaveFormatException("No '" + Dungeon.FILENAME_LEADER + "' after version indicator.");
         }
 
         dungeon = new Dungeon(dungeonFileLine.substring(
@@ -132,10 +137,17 @@ public class GameState {
                 try {
                     addToInventory(dungeon.getItem(itemName));
                 } catch (Item.NoItemException e) {
-                    throw new IllegalSaveFormatException("No such item '" +
-                        itemName + "'");
+                    throw new IllegalSaveFormatException("No such item '" + itemName + "'");
                 }
             }
+        }
+        if (s.hasNext()) { // SCORE
+            String number = s.nextLine().substring(SCORE_LEADER.length());;
+            this.score = Integer.parseInt(number);
+        }
+        if (s.hasNext()) { // HEALTH
+            String number = s.nextLine().substring(HEALTH_LEADER.length());;
+            this.health = Integer.parseInt(number);
         }
     }
 
@@ -168,6 +180,9 @@ public class GameState {
             }
             w.println(inventory.get(inventory.size()-1).getPrimaryName());
         }
+        w.println(SCORE_LEADER + this.score);
+        w.println(HEALTH_LEADER + this.health);
+        //TODO add Health and Score to write file.
         w.close();
     }
 

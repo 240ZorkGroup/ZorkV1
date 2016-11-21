@@ -50,6 +50,7 @@ class ItemSpecificCommand extends Command {
             } else {
                 command = evt;
             }
+
             try {
                 switch (verb) {
                     case "kick":
