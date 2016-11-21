@@ -422,10 +422,10 @@ public class GameState {
      */
     void changeTimeOfDay() {
         if (dayTime == false) {
-            System.out.println("It is now day-time outside.");
+            System.out.println("\n --- It is now day-time outside ---");
             dayTime = true;
         } else if (dayTime == true) {
-            System.out.println("It is now night-time outside.");
+            System.out.println("\n --- It is now night-time outside ---");
             dayTime = false;
         }
     }

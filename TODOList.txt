@@ -14,6 +14,6 @@ Supplementary:
 Verbose                 - done
 Hunger                  - done
 Thirst                  - Are we still doing this one?
-External Clock          -
-Close and Locked Exits  -
-NPC/TicTacToe           - done / need to implement.
+External Clock          - done
+Close and Locked Exits  - 
+NPC/TicTacToe           - done
