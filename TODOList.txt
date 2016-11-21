@@ -13,7 +13,8 @@ Teleport                - done
 Supplementary:
 Verbose                 - done
 Hunger                  - done
-Thirst                  - Are we still doing this one?
+Light					- 
+Thirst                  - 
 External Clock          - done
 Close and Locked Exits  - 
 NPC/TicTacToe           - done
