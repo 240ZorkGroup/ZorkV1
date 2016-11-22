@@ -1,6 +1,7 @@
 
 //package zeitz_borkv3;
 
+
 import java.util.ArrayList;
 
 /**
@@ -10,8 +11,6 @@ class ItemSpecificCommand extends Command {
 
     private String verb;
     private String noun;
-    private String command;
-    private int nums;
 
 
     /**
@@ -27,7 +26,7 @@ class ItemSpecificCommand extends Command {
 
     public String execute() {
 
-        Item itemReferredTo = null;
+        Item itemReferredTo;
         try {
             itemReferredTo = GameState.instance().getItemInVicinityNamed(noun);
         } catch (Item.NoItemException e) {
@@ -35,96 +34,73 @@ class ItemSpecificCommand extends Command {
         }
 
         String msg = itemReferredTo.getMessageForVerb(verb);
+        String command;
+        String paramsString;
+        int nums = 0;
 
-        /**
-         * This part needs a switch, but also needs some kind of hashtable to process what is being "kicked"
-         * and the consequences for doing so. When you kick the can, you are not harmed. If you kick the bomb, you are wounded, etc.
-         */
         // switch for ItemSpecificCommands
         ArrayList<String> events = itemReferredTo.getEventForVerb(verb);
-        for (String evt : events) {
-            if (evt.contains("(")) {
-                String[] evt2 = evt.split("\\(");
-                command = evt2[0];
-                //nums = Integer.parseInt(evt2[1].substring(0, evt2[1].indexOf(")")));
-            } else {
-                command = evt;
-            }
-
-            try {
-                switch (verb) {
-                    case "kick":
-                        if (noun.equals("Bomb")) {
-                            GameState.instance().wound(2);
-                        }
-                        break;
-                    case "detonate":
-                        if (noun.equals("Bomb")) {
-                            GameState.instance().die();
-                        }
-                        break;
-                    case "drink":
-                        if (noun.equals("DrPepper")) {
-                            try {
-                                itemReferredTo.transform(GameState.instance().getDungeon().getItems().get("emptyCan"));
-                            } catch (Item.NoItemException e) {
-                                e.printStackTrace();
-                            }
-                            GameState.instance().wound(-1);
-                            System.out.print("You were just wounded.\nFigure out why this repeats." );  //TODO For some reason, everything passes through twice because this prints twice when called.
-                        }
-                        break;
-                    case "stomp":
-                        if (noun.equals("emptyCan")) {
-                            try {
-                                itemReferredTo.transform(GameState.instance().getDungeon().getItems().get("squishedCan"));
-                            } catch (Item.NoItemException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        break;
-                    case "wave":
-                        if (noun.equals("magicWand")) {
-                            GameState.instance().setScore(5);
-                            GameState.instance().teleport();
-                        }
-                    case "break":
-                        if (noun.equals("magicWand")) {
-                            GameState.instance().wound(10);
-                            try {
-                                GameState.instance().disappear(itemReferredTo);
-                            } catch (Item.NoItemException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        break;
-                    case "touch":
-                        if (noun.equals("StarWarsToy")) {
-                            GameState.instance().setScore(1);
-                        }
-                        break;
-                    case "refill":
-                        if (noun.equals("WawaTravelMug")) {
-                            GameState.instance().win();
-                        }
-                        break;
-                    case "eat":
-                        if (noun.equals("donut")) {
-                            try {
-                                GameState.instance().disappear(itemReferredTo);
-                            } catch (Item.NoItemException e) {
-                                e.printStackTrace();
-                            }
-                            GameState.instance().wound(-2);
-                        }
-                        break;
+        if (events != null) {
+            for (String evt : events) {
+                System.out.println(" - EVENT: " + evt);                                                        // TODO PrintLine
+                if (evt.contains("(")) {                                                        // If the event contains a "("
+                    String[] evt2 = evt.split("\\(");                                           // Split that up
+                    command = evt2[0];                                                          // Command is the first part
+                    paramsString = evt2[1].substring(evt2[1].indexOf("(") + 1, evt2[1].indexOf(")")); // numString is the string of numbers inside the "()"
+                    if (isInteger(paramsString)) {
+                        nums = Integer.parseInt(paramsString);                                         // turns numString into a nums int
+                    } else {
+                        nums = 0;
+                    }
+                } else {
+                    command = evt;
+                    paramsString = "";
                 }
-            } catch (java.util.InputMismatchException err) {
-                System.out.println("\nINVALID!");
+
+                switch (command) {
+                    case "Wound":
+                        GameState.instance().wound(nums);
+                        break;
+                    case "Die":
+                        GameState.instance().die();
+                        break;
+                    case "Win":
+                        GameState.instance().win();
+                        break;
+                    case "Disappear":
+                        try {
+                            GameState.instance().disappear(itemReferredTo);
+                        } catch (Item.NoItemException e) {
+                            e.printStackTrace();
+                        }
+                    case "Teleport":
+                        GameState.instance().teleport();
+                        break;
+                    case "Score":
+                        GameState.instance().setScore(nums);
+                        break;
+                    case "Transform":
+                        try {
+                            itemReferredTo.transform(GameState.instance().getDungeon().getItems().get(paramsString));
+                        } catch (Item.NoItemException e) {
+                            e.printStackTrace();
+                        }
+                }
             }
         }
-
         return (msg == null ?
                 "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
+    }
+
+
+    private static boolean isInteger(String s) {
+        boolean isInt = false;
+        try {
+            Integer.parseInt(s);
+            isInt = true;
+        } catch (NumberFormatException ex) {
+
+        }
+        return isInt;
     }
 }

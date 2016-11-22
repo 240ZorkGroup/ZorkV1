@@ -1,5 +1,5 @@
 Trinkle
-Group Bork v1.0
+Group Bork v3.0
 ===
 Items:
 Bomb
@@ -23,7 +23,8 @@ stomp[Transform(squishedCan)]:The can crunches down into a thin disk, useful for
 squishedCan
 2
 throw:Zing!
-stomp:Further stomping seems to have no effect. recycle[Score(5),Disappear]:Boo-ya, helped save the environment.
+stomp:Further stomping seems to have no effect.
+recycle[Score(5),Disappear]:Boo-ya, helped save the environment.
 ---
 magicWand
 5

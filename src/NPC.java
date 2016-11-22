@@ -1,4 +1,4 @@
-import java.util.Hashtable;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -19,24 +19,14 @@ public class NPC {
     /**
      * The Tictactoe.
      */
-    static TTT2 tictactoe;
+    private static TTT2 tictactoe;
     /**
      * The In.
      */
-    Scanner in = new Scanner(System.in);
+    private Scanner in = new Scanner(System.in);
     private boolean wait = false;
     private String monsterName;
     private String playerName;
-
-    /**
-     * Constructor class for NPCs will create a named NPC class.
-     *
-     * @param n The name of the NPC. Choose whatever you want.
-     */
-    NPC(String n){
-        this.monsterName = n;
-        this.playerName = "Player1";
-    }
 
     /**
      * Instantiates a new Npc.
@@ -49,8 +39,7 @@ public class NPC {
             Dungeon.IllegalDungeonFormatException {
 
         // Read NPC name.
-        String tempName = s.nextLine();
-        this.monsterName = tempName;
+        this.monsterName = s.nextLine();
         if (monsterName.equals(Dungeon.TOP_LEVEL_DELIM)) {
             throw new NoNPCException();
         }
@@ -60,7 +49,7 @@ public class NPC {
     /**
      * Converse method allows the player to play a game (within a game) with the NPC.
      */
-    public void converse(){
+    void converse(){
 
         // Dialogue
         System.out.println("As you were examining the room, an ugly beast appears. \n" +
@@ -117,18 +106,10 @@ public class NPC {
      *
      * @return the string
      */
-    public String getMonsterName(){
+    String getMonsterName(){
         return monsterName;
     }
 
-    /**
-     * Get player name string.
-     *
-     * @return the string
-     */
-    public String getPlayerName(){
-        return playerName;
-    }
 
     /**
      * Change wait status.
@@ -136,24 +117,22 @@ public class NPC {
      * @param waitStatus the wait status
      * @throws InterruptedException the interrupted exception
      */
-    public void changeWaitStatus(boolean waitStatus) throws InterruptedException {
+    void changeWaitStatus(boolean waitStatus) throws InterruptedException {
         wait = waitStatus;
         TimeUnit.SECONDS.sleep(2);
-        tictactoe.hide();
+        tictactoe.setVisible(false);
 
-        if (tictactoe.playerXWin()) {
+        if (TTT2.playerXWin()) {
             System.out.println("*** " + playerName + " Wins! ***");
-            //break;
-        } else if (tictactoe.playerOWin()) {
+        } else if (TTT2.playerOWin()) {
             System.out.println("*** " + monsterName + " Wins! ***");
-            //break;
         } else {
             System.out.println("There was a tie. Try harder next time.");
         }
 
         System.out.println("");
 
-        if (tictactoe.playerXWin()) {
+        if (TTT2.playerXWin()) {
             System.out.println("     " + monsterName + ": Thanks, " + playerName + ". Nobody ever wants to play with me. \n" +
                     "     " + monsterName + ": Everyone just walks right past me in Trinkle's basement, like I don't even exist! \n" +
                     "     " + monsterName + ": It's almost like these students can't even see me. Here's an extra 100 points for being nice to me.'");
