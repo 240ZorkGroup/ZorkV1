@@ -360,4 +360,8 @@ public class Room {
     ArrayList<Item> getContents() {
         return contents;
     }
+
+    public String toString(){
+        return title;
+    }
 }

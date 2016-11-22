@@ -32,29 +32,11 @@ public class Dungeon {
      * The constant TOP_LEVEL_DELIM.
      */
 // Variables relating to both dungeon file and game state storage.
-    public static String TOP_LEVEL_DELIM = "===";
+    static String TOP_LEVEL_DELIM = "===";
     /**
      * The constant SECOND_LEVEL_DELIM.
      */
-    public static String SECOND_LEVEL_DELIM = "---";
-
-    /**
-     * The constant ROOMS_MARKER.
-     */
-// Variables relating to dungeon file (.bork) storage.
-    public static String ROOMS_MARKER = "Rooms:";
-    /**
-     * The constant EXITS_MARKER.
-     */
-    public static String EXITS_MARKER = "Exits:";
-    /**
-     * The constant ITEMS_MARKER.
-     */
-    public static String ITEMS_MARKER = "Items:";
-    /**
-     * The constant NPCS_MARKER.
-     */
-    public static String NPCS_MARKER = "NPCs:";
+    static String SECOND_LEVEL_DELIM = "---";
 
     /**
      * The constant FILENAME_LEADER.
@@ -64,7 +46,7 @@ public class Dungeon {
     /**
      * The Room states marker.
      */
-    static String ROOM_STATES_MARKER = "Room states:";
+    private static String ROOM_STATES_MARKER = "Room states:";
 
     private String name;
     private Room entry;
@@ -72,20 +54,6 @@ public class Dungeon {
     private Hashtable<String,Item> items;
     private Hashtable<String,NPC> npcs;
     private String filename;
-
-    /**
-     * Instantiates a new Dungeon.
-     *
-     * @param name  the name
-     * @param entry the entry
-     */
-    Dungeon(String name, Room entry) {
-        init();
-        this.filename = null;    // null indicates not hydrated from file.
-        this.name = name;
-        this.entry = entry;
-        rooms = new Hashtable<String,Room>();
-    }
 
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
@@ -128,6 +96,10 @@ public class Dungeon {
         }
 
         // Throw away Items starter.
+        /*
+      The constant ITEMS_MARKER.
+     */
+        String ITEMS_MARKER = "Items:";
         if (!s.nextLine().equals(ITEMS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + ITEMS_MARKER + "' line where expected.");
         }
@@ -141,6 +113,10 @@ public class Dungeon {
 
 
         // Throw away NPCs starter.
+        /*
+      The constant NPCS_MARKER.
+     */
+        String NPCS_MARKER = "NPCs:";
         if (!s.nextLine().equals(NPCS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + NPCS_MARKER + "' line where expected.");
         }
@@ -153,6 +129,10 @@ public class Dungeon {
 
 
         // Throw away Rooms starter.
+        /*
+      The constant ROOMS_MARKER.
+     */
+        String ROOMS_MARKER = "Rooms:";
         if (!s.nextLine().equals(ROOMS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + ROOMS_MARKER + "' line where expected.");
         }
@@ -169,6 +149,10 @@ public class Dungeon {
         } catch (Room.NoRoomException e) {  /* end of rooms */ }
 
         // Throw away Exits starter.
+        /*
+      The constant EXITS_MARKER.
+     */
+        String EXITS_MARKER = "Exits:";
         if (!s.nextLine().equals(EXITS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + EXITS_MARKER + "' line where expected.");
         }
@@ -186,9 +170,9 @@ public class Dungeon {
     // Common object initialization tasks, regardless of which constructor
     // is used.
     private void init() {
-        rooms = new Hashtable<String,Room>();
-        items = new Hashtable<String,Item>();
-        npcs = new Hashtable<String,NPC>();
+        rooms = new Hashtable<>();
+        items = new Hashtable<>();
+        npcs = new Hashtable<>();
     }
 
     /**
@@ -297,7 +281,7 @@ public class Dungeon {
      *
      * @param item the item
      */
-    public void remove(Item item) {
+    void remove(Item item) {
         items.remove(item);
     }
 
@@ -307,23 +291,17 @@ public class Dungeon {
      * @param roomTitle the room title
      * @return the room
      */
-    public Room getRoom(String roomTitle) {
+    Room getRoom(String roomTitle) {
         return rooms.get(roomTitle);
     }
 
     /**
-     * Get Random Room
-     * Used by GameState.teleport()
+     * Get rooms hashtable.
      *
-     * @return random room
+     * @return the hashtable
      */
-    public Room getRandomRoom(){
-        int amountOfRooms = rooms.size();
-        int randomNum = (int)(Math.random() * amountOfRooms);
-        Random randomNumber = new Random();
-        Object[] keys = rooms.keySet().toArray();
-        Object key = keys[randomNumber.nextInt(keys.length)];
-        return rooms.get(key);
+    public Hashtable<String,Room> getRooms(){
+        return this.rooms;
     }
 
     /**
@@ -344,7 +322,7 @@ public class Dungeon {
      * @return item item
      * @throws Item.NoItemException the no item exception
      */
-    public Item getItem(String primaryItemName) throws Item.NoItemException {
+    Item getItem(String primaryItemName) throws Item.NoItemException {
         
         if (items.get(primaryItemName) == null) {
             throw new Item.NoItemException();
@@ -359,7 +337,7 @@ public class Dungeon {
      * @return NPC npc
      * @throws NPC.NoNPCException the no npc exception
      */
-    public NPC getNPC(String primaryNPCName) throws NPC.NoNPCException {
+    NPC getNPC(String primaryNPCName) throws NPC.NoNPCException {
         if (npcs.get(primaryNPCName) == null) {
             throw new NPC.NoNPCException();
         }

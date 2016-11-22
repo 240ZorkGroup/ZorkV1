@@ -88,8 +88,7 @@ public class CommandFactory {
             return new InventoryCommand();
         }
         if (MOVEMENT_COMMANDS.contains(verb)) {
-            //TODO make every so-many-moves makes the time of day change (day/night)
-            if (movementCount == 4) {
+            if (movementCount == 4) { // number of moves until the time of day changes.
                 GameState.instance().changeTimeOfDay();
                 movementCount = 0;
             }
