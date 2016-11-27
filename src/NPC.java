@@ -122,6 +122,7 @@ public class NPC {
         TimeUnit.SECONDS.sleep(2);
         tictactoe.setVisible(false);
 
+
         if (TTT2.playerXWin()) {
             System.out.println("*** " + playerName + " Wins! ***");
         } else if (TTT2.playerOWin()) {
@@ -143,6 +144,8 @@ public class NPC {
             System.out.println("You didn't win. You didn't earn any points.");
         }
         System.out.println("Score: " + GameState.instance().getScore());
+
+        tictactoe.reset();
     }
 
 }

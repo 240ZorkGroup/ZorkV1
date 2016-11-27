@@ -1,6 +1,7 @@
 /**
  * Command Factory
  * This class parses through the input and decides which command is being used.
+ *
  * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
  * @version 20161109
  */
@@ -24,7 +25,7 @@ public class CommandFactory {
      * The Movement commands.
      */
     public static List<String> MOVEMENT_COMMANDS =
-        Arrays.asList("n","w","e","s","u","d" );
+            Arrays.asList("n", "w", "e", "s", "u", "d");
 
     /**
      * Instance command factory.
@@ -62,14 +63,21 @@ public class CommandFactory {
         if (verb.equalsIgnoreCase("save")) {
             return new SaveCommand(noun);
         }
-        if (verb.equalsIgnoreCase("verbose")){
+        if (verb.equalsIgnoreCase("verbose")) {
             return new VerboseCommand(noun);
         }
+
         if (verb.equalsIgnoreCase("speak") && !parts[1].equalsIgnoreCase("to")) {
             return new SpeakCommand(noun);
         } else if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to") && !parts[2].equalsIgnoreCase("the")) {
             return new SpeakCommand(parts[2]);
         } else if (verb.equalsIgnoreCase("speak") && parts[1].equalsIgnoreCase("to") && parts[2].equalsIgnoreCase("the")) {
+            return new SpeakCommand(parts[3]);
+        } else if (verb.equalsIgnoreCase("play") && !parts[1].equalsIgnoreCase("with")) {
+            return new SpeakCommand(noun);
+        } else if (verb.equalsIgnoreCase("play") && parts[1].equalsIgnoreCase("with") && !parts[2].equalsIgnoreCase("the")) {
+            return new SpeakCommand(parts[2]);
+        } else if (verb.equalsIgnoreCase("play") && parts[1].equalsIgnoreCase("with") && parts[2].equalsIgnoreCase("the")) {
             return new SpeakCommand(parts[3]);
         }
         if (verb.equalsIgnoreCase("health")) {
@@ -102,3 +110,4 @@ public class CommandFactory {
         return new UnknownCommand(command);
     }
 }
+

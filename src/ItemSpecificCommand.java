@@ -99,7 +99,7 @@ class ItemSpecificCommand extends Command {
             Integer.parseInt(s);
             isInt = true;
         } catch (NumberFormatException ex) {
-
+            System.out.println("Not a number");
         }
         return isInt;
     }

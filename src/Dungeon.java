@@ -2,7 +2,6 @@
 //package zeitz_borkv3;
 
 import java.util.Hashtable;
-import java.util.Random;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -106,6 +105,7 @@ public class Dungeon {
 
         try {
             // Instantiate items.
+            //noinspection InfiniteLoopStatement
             while (true) {
                 add(new Item(s));
             }
@@ -122,6 +122,7 @@ public class Dungeon {
         }
         try {
             // Instantiate NPCs.
+            //noinspection InfiniteLoopStatement
             while (true) {
                 add(new NPC(s));
             }
@@ -143,6 +144,7 @@ public class Dungeon {
             add(entry);
 
             // Instantiate and add other rooms.
+            //noinspection InfiniteLoopStatement
             while (true) {
                 add(new Room(s, this, initState));
             }
@@ -159,6 +161,7 @@ public class Dungeon {
 
         try {
             // Instantiate exits.
+            //noinspection InfiniteLoopStatement
             while (true) {
                 Exit exit = new Exit(s, this);
             }
@@ -191,6 +194,7 @@ public class Dungeon {
         for (Room room : rooms.values()) {
             room.storeState(w);
         }
+        //noinspection SuspiciousNameCombination
         w.println(TOP_LEVEL_DELIM);
     }
 
@@ -282,6 +286,7 @@ public class Dungeon {
      * @param item the item
      */
     void remove(Item item) {
+        //noinspection SuspiciousMethodCalls
         items.remove(item);
     }
 
@@ -300,7 +305,7 @@ public class Dungeon {
      *
      * @return the hashtable
      */
-    public Hashtable<String,Room> getRooms(){
+    Hashtable<String,Room> getRooms(){
         return this.rooms;
     }
 
