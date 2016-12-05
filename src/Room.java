@@ -152,6 +152,10 @@ class Room {
         this.desc = desc;
     }
 
+    /**
+     * Changes description of Stephen's office depending on if lights are on or off.
+     */
+
     void lightOn() {
         if (GameState.instance().getInventoryNames().contains("torch")){
             descFlip = true;

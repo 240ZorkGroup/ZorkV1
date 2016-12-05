@@ -96,6 +96,7 @@ public class CommandFactory {
             return new InventoryCommand();
         }
         if (verb.equalsIgnoreCase("q")){
+            System.out.println("Bye!");
             System.exit(0);
         }
         if (MOVEMENT_COMMANDS.contains(verb)) {
