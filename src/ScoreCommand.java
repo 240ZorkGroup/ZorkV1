@@ -2,18 +2,22 @@
 
 /**
  * Score Command
+ *
  * @author Billy Andrews, Maryfay Jackson, Kelly Morgan
- * @date 20161107
+ * @version 20161107
  */
-
 class ScoreCommand extends Command {
 
-    int score = GameState.instance().getScore();
+    /**
+     * The Score.
+     */
+    private int score;
 
     /**
      * Constructs a score command with the initial score of zero.
      */
     ScoreCommand() {
+        score = GameState.instance().getScore();
     }
 
     /**
@@ -25,7 +29,7 @@ class ScoreCommand extends Command {
             return "Score: " +score +" - You haven't scored any points yet.\n";
         } else if (score < 100 && score > 0){
             return "Score: " +score +" - Your score is okay.";
-        } else if (score > 100) {
+        } else if (score >= 100) {
             return "Score: " +score +" - Your score is great!";
         }
         return "";

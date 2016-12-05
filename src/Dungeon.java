@@ -9,27 +9,44 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
+/**
+ * The type Dungeon.
+ */
 public class Dungeon {
 
+    /**
+     * The type Illegal dungeon format exception.
+     */
     public static class IllegalDungeonFormatException extends Exception {
+        /**
+         * Instantiates a new Illegal dungeon format exception.
+         *
+         * @param e the e
+         */
         public IllegalDungeonFormatException(String e) {
             super(e);
         }
     }
 
-    // Variables relating to both dungeon file and game state storage.
-    public static String TOP_LEVEL_DELIM = "===";
-    public static String SECOND_LEVEL_DELIM = "---";
+    /**
+     * The constant TOP_LEVEL_DELIM.
+     */
+// Variables relating to both dungeon file and game state storage.
+    static String TOP_LEVEL_DELIM = "===";
+    /**
+     * The constant SECOND_LEVEL_DELIM.
+     */
+    static String SECOND_LEVEL_DELIM = "---";
 
-    // Variables relating to dungeon file (.bork) storage.
-    public static String ROOMS_MARKER = "Rooms:";
-    public static String EXITS_MARKER = "Exits:";
-    public static String ITEMS_MARKER = "Items:";
-    public static String NPCS_MARKER = "NPCs:";
-    
-    // Variables relating to game state (.sav) storage.
+    /**
+     * The constant FILENAME_LEADER.
+     */
+// Variables relating to game state (.sav) storage.
     static String FILENAME_LEADER = "Dungeon file: ";
-    static String ROOM_STATES_MARKER = "Room states:";
+    /**
+     * The Room states marker.
+     */
+    private static String ROOM_STATES_MARKER = "Room states:";
 
     private String name;
     private Room entry;
@@ -38,19 +55,15 @@ public class Dungeon {
     private Hashtable<String,NPC> npcs;
     private String filename;
 
-    Dungeon(String name, Room entry) {
-        init();
-        this.filename = null;    // null indicates not hydrated from file.
-        this.name = name;
-        this.entry = entry;
-        rooms = new Hashtable<String,Room>();
-    }
-
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it.
+     *
+     * @param filename The file you want to load from.
+     * @throws FileNotFoundException         File not found
+     * @throws IllegalDungeonFormatException Illegal Dungeon file format
      */
-    public Dungeon(String filename) throws FileNotFoundException, 
+    public Dungeon(String filename) throws FileNotFoundException,
         IllegalDungeonFormatException {
 
         this(filename, true);
@@ -59,8 +72,13 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it, including (possibly) the items in their original locations.
+     *
+     * @param filename  The file you want to load from
+     * @param initState true
+     * @throws FileNotFoundException         File not found.
+     * @throws IllegalDungeonFormatException Illegal dungeon file format
      */
-    public Dungeon(String filename, boolean initState) 
+    public Dungeon(String filename, boolean initState)
         throws FileNotFoundException, IllegalDungeonFormatException {
 
         init();
@@ -78,6 +96,10 @@ public class Dungeon {
         }
 
         // Throw away Items starter.
+        /*
+      The constant ITEMS_MARKER.
+     */
+        String ITEMS_MARKER = "Items:";
         if (!s.nextLine().equals(ITEMS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + ITEMS_MARKER + "' line where expected.");
         }
@@ -91,6 +113,10 @@ public class Dungeon {
 
 
         // Throw away NPCs starter.
+        /*
+      The constant NPCS_MARKER.
+     */
+        String NPCS_MARKER = "NPCs:";
         if (!s.nextLine().equals(NPCS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + NPCS_MARKER + "' line where expected.");
         }
@@ -103,6 +129,10 @@ public class Dungeon {
 
 
         // Throw away Rooms starter.
+        /*
+      The constant ROOMS_MARKER.
+     */
+        String ROOMS_MARKER = "Rooms:";
         if (!s.nextLine().equals(ROOMS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + ROOMS_MARKER + "' line where expected.");
         }
@@ -119,6 +149,10 @@ public class Dungeon {
         } catch (Room.NoRoomException e) {  /* end of rooms */ }
 
         // Throw away Exits starter.
+        /*
+      The constant EXITS_MARKER.
+     */
+        String EXITS_MARKER = "Exits:";
         if (!s.nextLine().equals(EXITS_MARKER)) {
             throw new IllegalDungeonFormatException("No '" + EXITS_MARKER + "' line where expected.");
         }
@@ -136,12 +170,18 @@ public class Dungeon {
     // Common object initialization tasks, regardless of which constructor
     // is used.
     private void init() {
-        rooms = new Hashtable<String,Room>();
-        items = new Hashtable<String,Item>();
-        npcs = new Hashtable<String,NPC>();
+        rooms = new Hashtable<>();
+        items = new Hashtable<>();
+        npcs = new Hashtable<>();
     }
 
-    /*
+    /**
+     * Store state.
+     *
+     * @param w the w
+     * @throws IOException the io exception
+     */
+/*
      * Store the current (changeable) state of this dungeon to the writer
      * passed.
      */
@@ -154,7 +194,13 @@ public class Dungeon {
         w.println(TOP_LEVEL_DELIM);
     }
 
-    /*
+    /**
+     * Restore state.
+     *
+     * @param s the s
+     * @throws GameState.IllegalSaveFormatException the illegal save format exception
+     */
+/*
      * Restore the (changeable) state of this dungeon to that reflected in the
      * reader passed.
      */
@@ -175,60 +221,108 @@ public class Dungeon {
         }
     }
 
+    /**
+     * Gets entry.
+     *
+     * @return the entry
+     */
     public Room getEntry() {
         return entry;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets filename.
+     *
+     * @return the filename
+     */
     public String getFilename() {
         return filename;
     }
 
 
+    /**
+     * Add.
+     *
+     * @param room the room
+     */
     public void add(Room room) {
         rooms.put(room.getTitle(),room);
     }
 
+    /**
+     * Add.
+     *
+     * @param npc the npc
+     */
     public void add(NPC npc) {
         npcs.put(npc.getMonsterName(),npc);
     }
 
+    /**
+     * Add.
+     *
+     * @param item the item
+     */
     public void add(Item item) {
         items.put(item.getPrimaryName(),item);
     }
 
-    public void remove(Item item) {
+    /**
+     * Remove.
+     *
+     * @param item the item
+     */
+    void remove(Item item) {
         items.remove(item);
     }
 
-    public Room getRoom(String roomTitle) {
+    /**
+     * Gets room.
+     *
+     * @param roomTitle the room title
+     * @return the room
+     */
+    Room getRoom(String roomTitle) {
         return rooms.get(roomTitle);
     }
 
     /**
-     * Get Random Room
-     * Used by GameState.teleport()
-     * @return random room
+     * Get rooms hashtable.
+     *
+     * @return the hashtable
      */
-    public Room getRandomRoom(){
-        int amountOfRooms = rooms.size();
-        int randomNum = (int)(Math.random() * amountOfRooms);
-        Random randomNumber = new Random();
-        Object[] keys = rooms.keySet().toArray();
-        Object key = keys[randomNumber.nextInt(keys.length)];
-        return rooms.get(key);
+    public Hashtable<String,Room> getRooms(){
+        return this.rooms;
     }
 
+    /**
+     * Get items hashtable.
+     *
+     * @return the hashtable
+     */
+    public Hashtable<String,Item> getItems(){
+        return this.items;
+    }
 
     /**
      * Get the Item object whose primary name is passed. This has nothing to
      * do with where the Adventurer might be, or what's in his/her inventory,
      * etc.
+     *
+     * @param primaryItemName the item name that you want to get.
+     * @return item item
+     * @throws Item.NoItemException the no item exception
      */
-    public Item getItem(String primaryItemName) throws Item.NoItemException {
+    Item getItem(String primaryItemName) throws Item.NoItemException {
         
         if (items.get(primaryItemName) == null) {
             throw new Item.NoItemException();
@@ -236,7 +330,14 @@ public class Dungeon {
         return items.get(primaryItemName);
     }
 
-    public NPC getNPC(String primaryNPCName) throws NPC.NoNPCException {
+    /**
+     * Get the NPC whose name is passed.
+     *
+     * @param primaryNPCName The primary name of the NPC you want to get.
+     * @return NPC npc
+     * @throws NPC.NoNPCException the no npc exception
+     */
+    NPC getNPC(String primaryNPCName) throws NPC.NoNPCException {
         if (npcs.get(primaryNPCName) == null) {
             throw new NPC.NoNPCException();
         }

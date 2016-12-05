@@ -1,28 +1,106 @@
 
 //package zeitz_borkv3;
 
+
+import java.util.ArrayList;
+
+/**
+ * The type Item specific command.
+ */
 class ItemSpecificCommand extends Command {
 
     private String verb;
     private String noun;
-                        
 
+
+    /**
+     * Instantiates a new Item specific command.
+     *
+     * @param verb the verb
+     * @param noun the noun
+     */
     ItemSpecificCommand(String verb, String noun) {
         this.verb = verb;
         this.noun = noun;
     }
 
     public String execute() {
-        
-        Item itemReferredTo = null;
+
+        Item itemReferredTo;
         try {
             itemReferredTo = GameState.instance().getItemInVicinityNamed(noun);
         } catch (Item.NoItemException e) {
             return "There's no " + noun + " here.";
         }
-        
+
         String msg = itemReferredTo.getMessageForVerb(verb);
-        return (msg == null ? 
-            "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
+        String command;
+        String paramsString;
+        int nums = 0;
+
+        // switch for ItemSpecificCommands
+        ArrayList<String> events = itemReferredTo.getEventForVerb(verb);
+        if (events != null) {
+            for (String evt : events) {
+                System.out.println(" - EVENT: " + evt);                                                        // TODO PrintLine
+                if (evt.contains("(")) {                                                        // If the event contains a "("
+                    String[] evt2 = evt.split("\\(");                                           // Split that up
+                    command = evt2[0];                                                          // Command is the first part
+                    paramsString = evt2[1].substring(evt2[1].indexOf("(") + 1, evt2[1].indexOf(")")); // numString is the string of numbers inside the "()"
+                    if (isInteger(paramsString)) {
+                        nums = Integer.parseInt(paramsString);                                         // turns numString into a nums int
+                    } else {
+                        nums = 0;
+                    }
+                } else {
+                    command = evt;
+                    paramsString = "";
+                }
+
+                switch (command) {
+                    case "Wound":
+                        GameState.instance().wound(nums);
+                        break;
+                    case "Die":
+                        GameState.instance().die();
+                        break;
+                    case "Win":
+                        GameState.instance().win();
+                        break;
+                    case "Disappear":
+                        try {
+                            GameState.instance().disappear(itemReferredTo);
+                        } catch (Item.NoItemException e) {
+                            e.printStackTrace();
+                        }
+                    case "Teleport":
+                        GameState.instance().teleport();
+                        break;
+                    case "Score":
+                        GameState.instance().setScore(nums);
+                        break;
+                    case "Transform":
+                        try {
+                            itemReferredTo.transform(GameState.instance().getDungeon().getItems().get(paramsString));
+                        } catch (Item.NoItemException e) {
+                            e.printStackTrace();
+                        }
+                }
+            }
+        }
+        return (msg == null ?
+                "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
+    }
+
+
+    private static boolean isInteger(String s) {
+        boolean isInt = false;
+        try {
+            Integer.parseInt(s);
+            isInt = true;
+        } catch (NumberFormatException ex) {
+
+        }
+        return isInt;
     }
 }

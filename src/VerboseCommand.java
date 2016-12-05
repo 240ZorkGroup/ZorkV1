@@ -1,17 +1,26 @@
 /**
  * VerboseCommand displays the room description if toggled on, otherwise it only displays the first time.
+ *
  * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
  * @version 20161109
  */
-    class VerboseCommand extends Command {
+class VerboseCommand extends Command {
 
-        public static boolean verboseToggle;
-        public static String command;
+    /**
+     * The constant verboseToggle.
+     */
+    public static boolean verboseToggle = true;
+    /**
+     * The constant command.
+     */
+    public static String command;
 
     /**
      * Constructor for VerboseCommand.
+     *
+     * @param command the command
      */
-        VerboseCommand(String command) {
+    VerboseCommand(String command) {
             this.command = command;
         }
 
@@ -31,7 +40,12 @@
             return "";
         }
 
-        public static boolean getVerbose(){
+    /**
+     * Get verbose boolean.
+     *
+     * @return the boolean
+     */
+    public static boolean getVerbose(){
             return verboseToggle;
         }
     }

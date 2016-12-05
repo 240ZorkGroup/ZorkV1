@@ -3,6 +3,7 @@
 
 /**
  * DropCommand drops an item from the player's inventory
+ *
  * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
  * @version 20161109
  */
@@ -12,6 +13,7 @@ class DropCommand extends Command {
 
     /**
      * Constructor for DropCommand
+     *
      * @param itemName Item that you want to be dropped.
      */
     DropCommand(String itemName) {

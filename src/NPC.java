@@ -1,35 +1,45 @@
-import java.util.Hashtable;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
  * NPC - Non-Player Characters
  * This class provides an NPC that the player can interact with.
+ *
  * @author Billy Andrews, Kelly Morgan, Maryfay Jackson
  * @version 20161109
  */
 public class NPC {
 
+    /**
+     * The type No npc exception.
+     */
     static class NoNPCException extends Exception {}
-    static TTT2 tictactoe;
-    Scanner in = new Scanner(System.in);
+
+    /**
+     * The Tictactoe.
+     */
+    private static TTT2 tictactoe;
+    /**
+     * The In.
+     */
+    private Scanner in = new Scanner(System.in);
     private boolean wait = false;
     private String monsterName;
     private String playerName;
-    /**
-     * Constructor class for NPCs will create a named NPC class.
-     * @param n The name of the NPC. Choose whatever you want.
-     */
-    NPC(String n){
-        this.monsterName = n;
-    }
 
+    /**
+     * Instantiates a new Npc.
+     *
+     * @param s the s
+     * @throws NoNPCException                the no npc exception
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
+     */
     NPC(Scanner s) throws NoNPCException,
             Dungeon.IllegalDungeonFormatException {
 
         // Read NPC name.
-        String tempName = s.nextLine();
-        this.monsterName = tempName;
+        this.monsterName = s.nextLine();
         if (monsterName.equals(Dungeon.TOP_LEVEL_DELIM)) {
             throw new NoNPCException();
         }
@@ -39,7 +49,7 @@ public class NPC {
     /**
      * Converse method allows the player to play a game (within a game) with the NPC.
      */
-    public void converse(){
+    void converse(){
 
         // Dialogue
         System.out.println("As you were examining the room, an ugly beast appears. \n" +
@@ -50,7 +60,10 @@ public class NPC {
 
         System.out.print("     " + monsterName + ": So what do you say? A quick game of Tic-Tac-Toe? (y/n): ");
         String answer = in.nextLine();
-        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y")) { // Wants to play Tic Tac Toe
+        if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("ye")
+                || answer.equalsIgnoreCase("yea") || answer.equalsIgnoreCase("yeah") || answer.equalsIgnoreCase("yup")
+                || answer.equalsIgnoreCase("yep") || answer.equalsIgnoreCase("sure") || answer.equalsIgnoreCase("okay") || answer.equalsIgnoreCase("ok")
+                || answer.equalsIgnoreCase("absolutely")) { // Wants to play Tic Tac Toe
             System.out.print("     " + monsterName + ": Great! I don't think I caught your name. (enter your name): ");
             String name = in.nextLine();
             System.out.println();
@@ -64,7 +77,7 @@ public class NPC {
             tictactoe.setVisible(true);
 
         } else if (answer.equalsIgnoreCase("no") || answer.equalsIgnoreCase("n")){ // Doesn't want to play Tic Tac Toe.
-            System.out.println("     " + playerName + ": I don't have time for that right now.");
+            System.out.println("\n     You: I don't have time for that right now.");
             System.out.println("     " + monsterName + ": Maybe next time.");
             System.out.println();
         } else {
@@ -72,38 +85,54 @@ public class NPC {
         }
     }
 
+    /**
+     * Goes by boolean.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     boolean goesBy(String name) {
         // could have other aliases
         return this.monsterName.equals(name);
     }
 
-
-    public String getMonsterName(){
+    public String toString() {
         return monsterName;
     }
 
-    public String getPlayerName(){
-        return playerName;
+
+    /**
+     * Get monster name string.
+     *
+     * @return the string
+     */
+    String getMonsterName(){
+        return monsterName;
     }
 
-    public void changeWaitStatus(boolean waitStatus) throws InterruptedException {
+
+    /**
+     * Change wait status.
+     *
+     * @param waitStatus the wait status
+     * @throws InterruptedException the interrupted exception
+     */
+    void changeWaitStatus(boolean waitStatus) throws InterruptedException {
         wait = waitStatus;
         TimeUnit.SECONDS.sleep(2);
-        tictactoe.hide();
+        tictactoe.setVisible(false);
 
-        if (tictactoe.playerXWin()) {
+        if (TTT2.playerXWin()) {
             System.out.println("*** " + playerName + " Wins! ***");
-            //break;
-        } else if (tictactoe.playerOWin()) {
+        } else if (TTT2.playerOWin()) {
             System.out.println("*** " + monsterName + " Wins! ***");
-            //break;
         } else {
             System.out.println("There was a tie. Try harder next time.");
         }
 
         System.out.println("");
 
-        if (tictactoe.playerXWin()) {
+        if (TTT2.playerXWin()) {
             System.out.println("     " + monsterName + ": Thanks, " + playerName + ". Nobody ever wants to play with me. \n" +
                     "     " + monsterName + ": Everyone just walks right past me in Trinkle's basement, like I don't even exist! \n" +
                     "     " + monsterName + ": It's almost like these students can't even see me. Here's an extra 100 points for being nice to me.'");

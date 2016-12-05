@@ -6,13 +6,25 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * The type Room.
+ */
 public class Room {
 
+    /**
+     * The type No room exception.
+     */
     class NoRoomException extends Exception {
     }
 
+    /**
+     * The Contents starter.
+     */
     static String CONTENTS_STARTER = "Contents: ";
-    static String NPCS_STARTER = "NPCs: ";
+    /**
+     * The Npcs starter.
+     */
+    static String NPCS_STARTER = "NPC: ";
 
     private String title;
     private String desc;
@@ -21,11 +33,24 @@ public class Room {
     private ArrayList<Exit> exits;
     private ArrayList<NPC> npcs;
 
+    /**
+     * Instantiates a new Room.
+     *
+     * @param title the title
+     */
     Room(String title) {
         init();
         this.title = title;
     }
 
+    /**
+     * Instantiates a new Room.
+     *
+     * @param s the s
+     * @param d the d
+     * @throws NoRoomException                       the no room exception
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
+     */
     Room(Scanner s, Dungeon d) throws NoRoomException,
             Dungeon.IllegalDungeonFormatException {
 
@@ -35,6 +60,12 @@ public class Room {
     /**
      * Given a Scanner object positioned at the beginning of a "room" file
      * entry, read and return a Room object representing it.
+     *
+     * @param s         scanner
+     * @param d         dungeon
+     * @param initState initState
+     * @throws NoRoomException                       the no room exception
+     * @throws Dungeon.IllegalDungeonFormatException the illegal dungeon format exception
      */
     Room(Scanner s, Dungeon d, boolean initState) throws NoRoomException,
             Dungeon.IllegalDungeonFormatException {
@@ -63,7 +94,8 @@ public class Room {
                                 "No such item '" + itemName + "'");
                     }
                 }
-            } else if (lineOfDesc.startsWith(NPCS_STARTER)) {
+            }
+            if (lineOfDesc.startsWith(NPCS_STARTER)) {
                 String npcList = lineOfDesc.substring(NPCS_STARTER.length());
                 String[] npcNames = npcList.split(",");
                 for (String npcName : npcNames) {
@@ -96,15 +128,31 @@ public class Room {
         beenHere = false;
     }
 
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
     String getTitle() {
         return title;
     }
 
+    /**
+     * Sets desc.
+     *
+     * @param desc the desc
+     */
     void setDesc(String desc) {
         this.desc = desc;
     }
 
-    /*
+    /**
+     * Store state.
+     *
+     * @param w the w
+     * @throws IOException the io exception
+     */
+/*
      * Store the current (changeable) state of this room to the writer
      * passed.
      */
@@ -121,13 +169,20 @@ public class Room {
         if (npcs.size() > 0) { // NPCs in Room
             w.print(NPCS_STARTER);
             for (int i = 0; i < npcs.size() - 1; i++) {
-                w.print(npcs.get(i) + ",");
+                w.print(npcs.get(i).getMonsterName() + ",");
             }
             w.println(npcs.get(npcs.size() - 1));
         }
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
 
+    /**
+     * Restore state.
+     *
+     * @param s the s
+     * @param d the d
+     * @throws GameState.IllegalSaveFormatException the illegal save format exception
+     */
     void restoreState(Scanner s, Dungeon d) throws
             GameState.IllegalSaveFormatException {
 
@@ -145,14 +200,30 @@ public class Room {
                 try {
                     add(d.getItem(itemName));
                 } catch (Item.NoItemException e) {
-                    throw new GameState.IllegalSaveFormatException(
-                            "No such item '" + itemName + "'");
+                    throw new GameState.IllegalSaveFormatException("No such item '" + itemName + "'");
+                }
+            }
+            s.nextLine();  // Consume "---".
+        }
+        if (line.startsWith(NPCS_STARTER)) {
+            String npcsList = line.substring(NPCS_STARTER.length());
+            String[] npcsNames = npcsList.split(",");
+            for (String npcsName : npcsNames) {
+                try {
+                    add(d.getNPC(npcsName));
+                } catch (NPC.NoNPCException e) {
+                    throw new GameState.IllegalSaveFormatException("No such NPC '" + npcsName + "'");
                 }
             }
             s.nextLine();  // Consume "---".
         }
     }
 
+    /**
+     * Describe string.
+     *
+     * @return the string
+     */
     public String describe() {
         String description;
         if (beenHere) {
@@ -169,10 +240,12 @@ public class Room {
             description += "\n";
         }
 
-        if (npcs.size() > 0) {
-            for (NPC npc : npcs) {
+        for (NPC npc : npcs) {
+            description += "\n" + npc.getMonsterName() + " is in here. You can speak to it.";
+        }
 
-            }
+        if (npcs.size() > 0) {
+            description += "\n";
         }
 
         if (VerboseCommand.verboseToggle) {
@@ -187,6 +260,12 @@ public class Room {
     }
 
 
+    /**
+     * Leave by room.
+     *
+     * @param dir the dir
+     * @return the room
+     */
     public Room leaveBy(String dir) {
         for (Exit exit : exits) {
             if (exit.getDir().equals(dir)) {
@@ -196,22 +275,49 @@ public class Room {
         return null;
     }
 
+    /**
+     * Add exit.
+     *
+     * @param exit the exit
+     */
     void addExit(Exit exit) {
         exits.add(exit);
     }
 
+    /**
+     * Add.
+     *
+     * @param item the item
+     */
     void add(Item item) {
         contents.add(item);
     }
 
+    /**
+     * Add.
+     *
+     * @param npc the npc
+     */
     void add(NPC npc) {
         npcs.add(npc);
     }
 
+    /**
+     * Remove.
+     *
+     * @param item the item
+     */
     void remove(Item item) {
         contents.remove(item);
     }
 
+    /**
+     * Gets item named.
+     *
+     * @param name the name
+     * @return the item named
+     * @throws Item.NoItemException the no item exception
+     */
     Item getItemNamed(String name) throws Item.NoItemException {
         for (Item item : contents) {
             if (item.goesBy(name)) {
@@ -221,6 +327,13 @@ public class Room {
         throw new Item.NoItemException();
     }
 
+    /**
+     * Gets npc named.
+     *
+     * @param name the name
+     * @return the npc named
+     * @throws NPC.NoNPCException the no npc exception
+     */
     NPC getNPCNamed(String name) throws NPC.NoNPCException {
         for (NPC npc : npcs) {
             if (npc.goesBy(name)) {
@@ -230,11 +343,25 @@ public class Room {
         throw new NPC.NoNPCException();
     }
 
+    /**
+     * Gets np cs.
+     *
+     * @return the np cs
+     */
     ArrayList<NPC> getNPCs() {
         return npcs;
     }
 
+    /**
+     * Gets contents.
+     *
+     * @return the contents
+     */
     ArrayList<Item> getContents() {
         return contents;
+    }
+
+    public String toString(){
+        return title;
     }
 }

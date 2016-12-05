@@ -1,26 +1,31 @@
 Bork v3.0 save data
-Dungeon file: /home/stephen/teaching/240/bork/files/trinklev3.bork
+Dungeon file: trinkleG3a_updated.bork
 Room states:
 Stephen's office:
-beenHere=true
+beenHere=false
+Contents: StarWarsToy,WawaTravelMug,donut
 ---
 Room B6:
 beenHere=true
-Contents: DrPepper
+NPC: Grue
 ---
 Basement hallway:
 beenHere=true
 ---
+Room B13:
+beenHere=false
+Contents: Bomb
+---
 Rotunda balcony:
 beenHere=false
-unlocked=false
 Contents: chainsaw,magicWand
 ---
 Rotunda:
 beenHere=true
-Contents: StarWarsToy
 ---
 ===
 Adventurer:
-Current room: Stephen's office
-Inventory: WawaTravelMug,donut
+Current room: Room B6
+Inventory: DrPepper
+Score: 100
+Health: 99
