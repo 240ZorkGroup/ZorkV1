@@ -34,7 +34,6 @@ class Room {
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
     private ArrayList<NPC> npcs;
-    private boolean roomLight = true;
 
     /**
      * Instantiates a new Room.
@@ -116,10 +115,7 @@ class Room {
             lineOfDesc = s.nextLine();
         }
 
-        if (lineOfDesc.startsWith(LIGHTS_STARTER)) {
-            roomLight = false;
-            lineOfDesc = s.nextLine();
-        }
+
 
         // throw away delimiter
         if (!lineOfDesc.equals(Dungeon.SECOND_LEVEL_DELIM)) {

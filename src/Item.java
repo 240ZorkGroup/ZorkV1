@@ -22,6 +22,7 @@ public class Item {
     private Hashtable<String, String> messages;
 
 
+
     /**
      * Item - added functionality of events for each specific-item command.
      *
@@ -142,4 +143,7 @@ public class Item {
         GameState.instance().addToInventory(item); // inventory
         GameState.instance().disappear(this);
     }
+
+
+
 }
