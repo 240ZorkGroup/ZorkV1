@@ -259,6 +259,18 @@ public class GameState {
         throw new Item.NoItemException();
     }
 
+    NPC getNPCInVicinityNamed(String name) throws NPC.NoNPCException {
+        // Next, check room contents.
+        for (NPC npc : adventurersCurrentRoom.getNPCs()) {
+            if (npc.goesBy(name)) {
+                return npc;
+            }
+        }
+
+        throw new NPC.NoNPCException();
+    }
+
+
     /**
      * Gets item from inventory named.
      *
