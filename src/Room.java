@@ -34,7 +34,7 @@ class Room {
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
     private ArrayList<NPC> npcs;
-    private boolean light = true;
+    private boolean roomLight = true;
 
     /**
      * Instantiates a new Room.
@@ -117,7 +117,7 @@ class Room {
         }
 
         if (lineOfDesc.startsWith(LIGHTS_STARTER)) {
-            light = false;
+            roomLight = false;
             lineOfDesc = s.nextLine();
         }
 
