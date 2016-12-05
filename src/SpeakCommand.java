@@ -29,7 +29,7 @@ class SpeakCommand extends Command {
         try {
             GameState.instance().getAdventurersCurrentRoom().getNPCNamed(noun).converse();
         } catch (NPC.NoNPCException e) {
-            e.printStackTrace();
+            return "There is no NPC named '" + noun + "' in this room.\nCheck spelling/capitalization\n";
         }
         return "";
     }

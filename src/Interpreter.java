@@ -15,8 +15,7 @@ public class Interpreter {
     /**
      * The constant USAGE_MSG.
      */
-    public static String USAGE_MSG =
-        "Usage: Interpreter borkFile.bork|saveFile.sav.";
+    private static String USAGE_MSG = "Usage: Interpreter borkFile.bork|saveFile.sav.";
 
     /**
      * Main.
@@ -37,23 +36,20 @@ public class Interpreter {
             state = GameState.instance();
             if (args[0].endsWith(".bork")) {
                 state.initialize(new Dungeon(args[0]));
-                System.out.println("\nWelcome to " + 
-                    state.getDungeon().getName() + "!");
+                System.out.println("\nWelcome to " + state.getDungeon().getName() + "!");
             } else if (args[0].endsWith(".sav")) {
                 state.restore(args[0]);
-                System.out.println("\nWelcome back to " + 
-                    state.getDungeon().getName() + "!");
+                System.out.println("\nWelcome back to " + state.getDungeon().getName() + "!");
             } else {
                 System.err.println(USAGE_MSG);
                 System.exit(2);
             }
 
-            System.out.print("\n" + 
-                state.getAdventurersCurrentRoom().describe() + "\n");
+            System.out.print("\n" + state.getAdventurersCurrentRoom().describe() + "\n");
 
             command = promptUser(commandLine);
 
-            while (!command.equals("q")) {
+            while (!command.equals("q") || !command.equals("quit") || !command.equals("exit")){
 
                 System.out.print(
                     CommandFactory.instance().parse(command).execute());
@@ -61,7 +57,7 @@ public class Interpreter {
                 command = promptUser(commandLine);
             }
 
-            System.out.println("Bye!");
+            System.out.println("Exiting Zork");
 
         } catch(Exception e) { 
             e.printStackTrace(); 

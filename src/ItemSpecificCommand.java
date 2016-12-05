@@ -42,7 +42,7 @@ class ItemSpecificCommand extends Command {
         ArrayList<String> events = itemReferredTo.getEventForVerb(verb);
         if (events != null) {
             for (String evt : events) {
-                System.out.println(" - EVENT: " + evt);                                                        // TODO PrintLine
+                //System.out.println(" - EVENT: " + evt);                                                        // TODO PrintLine
                 if (evt.contains("(")) {                                                        // If the event contains a "("
                     String[] evt2 = evt.split("\\(");                                           // Split that up
                     command = evt2[0];                                                          // Command is the first part
@@ -71,7 +71,7 @@ class ItemSpecificCommand extends Command {
                         try {
                             GameState.instance().disappear(itemReferredTo);
                         } catch (Item.NoItemException e) {
-                            e.printStackTrace();
+                            System.out.println("That item is already non-existent, therefore it cannot disappear.");
                         }
                     case "Teleport":
                         GameState.instance().teleport();
@@ -83,7 +83,7 @@ class ItemSpecificCommand extends Command {
                         try {
                             itemReferredTo.transform(GameState.instance().getDungeon().getItems().get(paramsString));
                         } catch (Item.NoItemException e) {
-                            e.printStackTrace();
+                            System.out.println("That item is not available for transformation.");
                         }
                 }
             }
@@ -99,7 +99,7 @@ class ItemSpecificCommand extends Command {
             Integer.parseInt(s);
             isInt = true;
         } catch (NumberFormatException ex) {
-
+            //System.out.println("Not a number");
         }
         return isInt;
     }
