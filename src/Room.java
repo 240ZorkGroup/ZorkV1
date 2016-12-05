@@ -153,7 +153,7 @@ class Room {
     }
 
     /**
-     * Changes description of Stephen's office depending on if lights are on or of.
+     * Changes description of Stephen's office depending on if lights are on or off.
      */
 
     void lightOn() {
