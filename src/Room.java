@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 /**
  * The type Room.
  */
-public class Room {
+class Room {
 
     /**
      * The type No room exception.
@@ -224,7 +224,7 @@ public class Room {
      *
      * @return the string
      */
-    public String describe() {
+    String describe() {
         String description;
         if (beenHere) {
             description = title;
@@ -266,7 +266,7 @@ public class Room {
      * @param dir the dir
      * @return the room
      */
-    public Room leaveBy(String dir) {
+    Room leaveBy(String dir) {
         for (Exit exit : exits) {
             if (exit.getDir().equals(dir)) {
                 return exit.getDest();
@@ -298,7 +298,7 @@ public class Room {
      *
      * @param npc the npc
      */
-    void add(NPC npc) {
+    private void add(NPC npc) {
         npcs.add(npc);
     }
 
