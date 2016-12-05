@@ -26,12 +26,15 @@ class Room {
      */
     static String NPCS_STARTER = "NPC: ";
 
+    static String LIGHTS_STARTER = "Lights: ";
+
     private String title;
     private String desc;
     private boolean beenHere;
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
     private ArrayList<NPC> npcs;
+    private boolean light = true;
 
     /**
      * Instantiates a new Room.
@@ -110,6 +113,11 @@ class Room {
             } else {
                 desc += lineOfDesc + "\n";
             }
+            lineOfDesc = s.nextLine();
+        }
+
+        if (lineOfDesc.startsWith(LIGHTS_STARTER)) {
+            light = false;
             lineOfDesc = s.nextLine();
         }
 

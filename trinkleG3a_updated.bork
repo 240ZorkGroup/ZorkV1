@@ -48,6 +48,10 @@ donut
 eat[Disappear,Wound(-2)]:You feel mildly guilt-ridden.
 stomp:The donut is now smooshed.
 ---
+torch
+7
+light: Your torch is lit.
+---
 ===
 NPCs:
 Grue
@@ -55,11 +59,13 @@ Grue
 ===
 Rooms:
 Rotunda
+Contents: torch
 You are in a beautiful round entry chamber, with tall white pillars that
-seemingly reach to the skies. There is an elevator here.
+seemingly reach to the skies. There is an elevator here as well as a torch in the corner.
 ---
 Basement hallway
 Contents: DrPepper
+Lights: off
 A long, white hallway stretches to the east and west. It is cold here, and you
 can detect the faint buzz of computer fans. A vending machine hums softly in the
 corner.
