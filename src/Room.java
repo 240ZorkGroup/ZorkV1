@@ -26,7 +26,6 @@ class Room {
      */
     static String NPCS_STARTER = "NPC: ";
 
-    static String LIGHTS_STARTER = "Lights: ";
 
     private String title;
     private String desc;
