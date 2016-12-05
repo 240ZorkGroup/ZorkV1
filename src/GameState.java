@@ -332,6 +332,11 @@ public class GameState {
     }
 
     /**
+     * depleteThirst - As the player moves through the dungeon, he gets thirstier with every move and subtracts 1 point per movement command.
+     */
+    void depleteThirst() { health = health - 1; }
+
+    /**
      * setHealth - Sets the player's health.
      *
      * @param healthPoints the amount of health points to be added. Can be negative to subtract points.

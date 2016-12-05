@@ -102,6 +102,7 @@ public class CommandFactory {
             }
             movementCount++;
             GameState.instance().depleteHunger();
+            GameState.instance().depleteThirst();
             return new MovementCommand(verb);
         }
         if (parts.length == 2) {
