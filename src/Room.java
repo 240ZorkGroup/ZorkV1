@@ -1,6 +1,8 @@
 
 //package zeitz_borkv3;
 
+import sun.plugin2.message.GetAppletMessage;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
@@ -33,6 +35,7 @@ class Room {
     private ArrayList<Item> contents;
     private ArrayList<Exit> exits;
     private ArrayList<NPC> npcs;
+    private boolean descFlip = false;
 
     /**
      * Instantiates a new Room.
@@ -147,6 +150,13 @@ class Room {
      */
     void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    void lightOn() {
+        if (GameState.instance().getInventoryNames().contains("torch")){
+            descFlip = true;
+            setDesc("This is a lit cluttered office, with many geeky toys sprawling on a desk.");
+        }
     }
 
     /**

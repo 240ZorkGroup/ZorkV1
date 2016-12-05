@@ -50,7 +50,7 @@ stomp:The donut is now smooshed.
 ---
 torch
 7
-light: Your torch is lit.
+light:Your torch is lit.
 ---
 ===
 NPCs:
@@ -71,7 +71,7 @@ corner.
 ---
 Stephen's office
 Contents: StarWarsToy,WawaTravelMug,donut
-This is a cluttered office, with many geeky toys sprawling on a desk.
+This room is too dark and injuries may occur. I bet you wish you had a light source.
 ---
 Room B6
 NPC: Grue

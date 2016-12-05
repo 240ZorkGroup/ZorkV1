@@ -95,6 +95,9 @@ public class CommandFactory {
         if (verb.equalsIgnoreCase("i") || verb.equalsIgnoreCase("inventory")) {
             return new InventoryCommand();
         }
+        if (verb.equalsIgnoreCase("q")){
+            System.exit(0);
+        }
         if (MOVEMENT_COMMANDS.contains(verb)) {
             if (movementCount == 4) { // number of moves until the time of day changes.
                 GameState.instance().changeTimeOfDay();
