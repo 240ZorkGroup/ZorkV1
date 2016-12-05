@@ -88,6 +88,9 @@ class ItemSpecificCommand extends Command {
                 }
             }
         }
+        if (verb.equalsIgnoreCase("light")) {
+            Room.lightOn();
+        }
         return (msg == null ?
                 "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
     }
