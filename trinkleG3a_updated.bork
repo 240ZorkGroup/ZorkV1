@@ -20,6 +20,10 @@ kick:The empty can skitters down the hallway.
 drink:Sorry, all gone!
 stomp[Transform(squishedCan)]:The can crunches down into a thin disk, useful for recycling.
 ---
+bottleWater
+10
+drink[Wound(-2)]:Drink up! Water is good for you.
+---
 squishedCan
 2
 throw:Zing!
@@ -48,6 +52,10 @@ donut
 eat[Disappear,Wound(-2)]:You feel mildly guilt-ridden.
 stomp:The donut is now smooshed.
 ---
+apple
+5
+eat[Disappear, Wound(-2)]:OH MAN that was a good apple.
+---
 torch
 7
 switch:Your torch is lit.
@@ -64,7 +72,7 @@ You are in a beautiful round entry chamber, with tall white pillars that
 seemingly reach to the skies. There is an elevator here as well as a torch in the corner.
 ---
 Basement hallway
-Contents: DrPepper
+Contents: DrPepper,apple
 A long, white hallway stretches to the east and west. It is cold here, and you
 can detect the faint buzz of computer fans. A vending machine hums softly in the
 corner.
@@ -84,7 +92,7 @@ merrily away at several of them. They look up and wave hello to you.
 The door locks behind you.
 ---
 Rotunda balcony
-Contents: chainsaw,magicWand
+Contents: chainsaw,magicWand,bottleWater
 You stand on a circular white balcony overlooking an entry hall.
 Columnar bannisters in ancient Grecian style stand between you and the
 precipice.

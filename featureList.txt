@@ -5,7 +5,9 @@ Verbose - Add commands "verbose on" and "verbose off" which will
 
 Hunger - The adventurer's health diminishes by 1 point per turn, and is
          only replenished by food, enough of which must is available throughout the dungeon.
-         You can check the health in supplemental.txt by typing "health".
+         You can test this in supplemental.txt by going down to Basement Hallway and eating
+         the apple, and then going west to Davies Office and eating the donut. You can type "health"
+         to see what your health is if you don't eat the food and go a few turns.
 
 Thirst - The adventurer's thirst diminishes by 1 point per turn, and is
          only replenished by food, enough of which is available throughout the dungeon.

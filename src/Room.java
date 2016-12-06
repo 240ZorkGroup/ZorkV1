@@ -156,12 +156,12 @@ class Room {
      * Changes description of Stephen's office depending on if lights are on or off.
      */
 
-    void lightOn() {
-        if (GameState.instance().getInventoryNames().contains("torch")){
-            descFlip = true;
-            setDesc("This is a lit cluttered office, with many geeky toys sprawling on a desk.");
-        }
-    }
+    //void lightOn() {
+        //if (GameState.instance().getInventoryNames().contains("torch")){
+            //descFlip = true;
+            //setDesc("This is a lit cluttered office, with many geeky toys sprawling on a desk.");
+        //}
+
 
     /**
      * Store state.
