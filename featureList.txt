@@ -1,7 +1,14 @@
-Verbose -
+Verbose - Add commands "verbose on" and "verbose off" which will toggle the exit text that currently always appears.
+Just typing "verbose on" or "verbose off" does the trick.
+
 Hunger -
+
 Thirst -
+
 Light -
+
 External Clock -
+
 Closed and Locked Exits -
+
 NPC/TicTacToe -
