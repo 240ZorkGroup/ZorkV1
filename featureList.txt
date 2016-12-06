@@ -1,0 +1,7 @@
+Verbose -
+Hunger -
+Thirst -
+Light -
+External Clock -
+Closed and Locked Exits -
+NPC/TicTacToe -
