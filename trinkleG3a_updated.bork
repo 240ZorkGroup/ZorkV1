@@ -50,7 +50,7 @@ stomp:The donut is now smooshed.
 ---
 torch
 7
-light:Your torch is lit.
+switch:Your torch is lit.
 ---
 ===
 NPCs:
