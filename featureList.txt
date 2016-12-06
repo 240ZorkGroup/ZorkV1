@@ -3,15 +3,24 @@ Verbose - Add commands "verbose on" and "verbose off" which will
            You can test Verbose in supplemental.bork just by
            typing "verbose on" or "verbose off".
 
+-----------------------------------------------------------------------------------------------------------
+
 Hunger - The adventurer's health diminishes by 1 point per turn, and is
          only replenished by food, enough of which must is available throughout the dungeon.
          You can test this in supplemental.txt by going down to Basement Hallway and eating
          the apple, and then going west to Davies Office and eating the donut. You can type "health"
          to see what your health is if you don't eat the food and go a few turns.
 
+-----------------------------------------------------------------------------------------------------------
+
 Thirst - The adventurer's thirst diminishes by 1 point per turn, and is
          only replenished by food, enough of which is available throughout the dungeon.
-         You can check your health in supplemental.txt by typing "health".
+         You can test your thirst in supplemental features bygoing down to the Basement Hallway
+         and drinking the DrPepper and then going back up to the Rotunda and then up to the
+         Rotunda Balcony and drinking the bottleWater that is there. Or you can go a few turns
+         without drinking anything and checking your health.
+
+------------------------------------------------------------------------------------------------------------
 
 Light - Some rooms, not all, will be completely dark to the adventurer unless
         he/she has a light source (torch, spylaser, lightsaber, whatever) available and turned
@@ -22,8 +31,23 @@ Light - Some rooms, not all, will be completely dark to the adventurer unless
         room and display another description. Proceed by going w,e,w,e,w,e,w,e,w,e for a total of 10
         turns, then Davies Office will be dark again.
 
-External Clock -
+------------------------------------------------------------------------------------------------------------
+
+External Clock - Some passage of time exists in a way the adventurer can
+                 experience. A simple example of this is time of day: as the user plays the dungeon,
+                 time will cycle from day to night and back again at an appropriate pace. Randomized
+                 weather events would be another colorful choice. .To test this in supplemental.txt,
+                 play about 4-5 turns and when it changes time of day you get a notice.
+
+------------------------------------------------------------------------------------------------------------
 
 Closed and Locked Exits -
 
-NPC/TicTacToe -
+------------------------------------------------------------------------------------------------------------
+
+NPC/TicTacToe - There are other creatures in the dungeon besides just the adventurer. These creatures
+                have their own position, state, inventory, health, and possibly other attributes, and
+                the player can only interact with them when they encounter each other. To test this
+                using supplementary.txt, you can go down to the Basement hallway, then east to room B6.
+                If you type "speak to Grue" then you can interact with him. He will ask you to play a
+                game of TicTacToe. If you win you get 100 points added to your score.
