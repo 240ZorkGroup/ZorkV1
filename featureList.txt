@@ -1,7 +1,9 @@
 Verbose - Add commands "verbose on" and "verbose off" which will toggle the exit text that currently always appears.
 Just typing "verbose on" or "verbose off" does the trick.
 
-Hunger -
+Hunger - The adventurer's health diminishes by (say) 1 point per turn, and is
+         only replenished by food, enough of which must be available somewhere and
+         somehow in the dungeon.
 
 Thirst -
 
