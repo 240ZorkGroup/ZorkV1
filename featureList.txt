@@ -41,7 +41,8 @@ External Clock - Some passage of time exists in a way the adventurer can
 
 ------------------------------------------------------------------------------------------------------------
 
-Closed and Locked Exits -
+Closed and Locked Exits - Some exits can be in a closed or locked state, and require
+                          certain items ("keys") to be present and/or activated in order to open them.
 
 ------------------------------------------------------------------------------------------------------------
 
