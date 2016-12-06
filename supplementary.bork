@@ -22,7 +22,7 @@ stomp[Transform(squishedCan)]:The can crunches down into a thin disk, useful for
 ---
 bottleWater
 10
-drink[Wound(-2)]:Drink up! Water is good for you.
+drink[Wound(-2)]:Drink up! Water is good for you!
 ---
 squishedCan
 2
