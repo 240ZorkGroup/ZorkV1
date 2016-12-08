@@ -88,9 +88,13 @@ class ItemSpecificCommand extends Command {
                 }
             }
         }
-        //if (verb.equalsIgnoreCase("light")) {
-            //Room.lightOn();
-        //}
+        if (verb.equalsIgnoreCase("switch") || noun.equalsIgnoreCase("torch")) {
+            Room currentRoom = GameState.instance().getAdventurersCurrentRoom().lightOn(); //it gets the desc before it can be reset?
+            if (currentRoom.equals("Stephen's office")) {
+                System.out.println("Hey it used this one!");
+            }
+        }
+
         return (msg == null ?
                 "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
     }

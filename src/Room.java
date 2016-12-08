@@ -1,8 +1,6 @@
 
 //package zeitz_borkv3;
 
-import sun.plugin2.message.GetAppletMessage;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
@@ -156,11 +154,14 @@ class Room {
      * Changes description of Stephen's office depending on if lights are on or off.
      */
 
-    //void lightOn() {
-        //if (GameState.instance().getInventoryNames().contains("torch")){
-            //descFlip = true;
-            //setDesc("This is a lit cluttered office, with many geeky toys sprawling on a desk.");
-        //}
+    Room lightOn() {
+        if (GameState.instance().getInventoryNames().contains("torch")) {
+            descFlip = true;
+            setDesc("This is a well-lit, albeit cluttered office, with many geeky toys sprawling on a desk.");
+            System.out.println(desc);
+        }
+        return null;
+    }
 
 
     /**
