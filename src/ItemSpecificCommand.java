@@ -88,11 +88,16 @@ class ItemSpecificCommand extends Command {
                 }
             }
         }
-        if (verb.equalsIgnoreCase("switch") || noun.equalsIgnoreCase("torch")) {
-            Room currentRoom = GameState.instance().getAdventurersCurrentRoom().lightOn(); //it gets the desc before it can be reset?
-            if (currentRoom.equals("Stephen's office")) {
-                System.out.println("Hey it used this one!");
+        if (verb.equalsIgnoreCase("switch")) {
+            GameState.instance().getAdventurersCurrentRoom().lightOn();
+            /*
+            Room descRoom = currentRoom.setDesc("This is a well-lit, albeit cluttered office, with many geeky toys sprawling on a desk.");
+            descRoom.lightOn(); //it gets the desc before it can be reset?
+            if (currentRoom.equals(GameState.instance().getAdventurersCurrentRoom().describe())) {
+            if (currentRoom.equals("Stephen's office"))
+            System.out.println("Hey it used this one!");
             }
+            */
         }
 
         return (msg == null ?
