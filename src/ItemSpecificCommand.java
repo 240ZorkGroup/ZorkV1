@@ -11,6 +11,7 @@ class ItemSpecificCommand extends Command {
 
     private String verb;
     private String noun;
+    private int lightTurns = 10;
 
 
     /**
@@ -90,6 +91,12 @@ class ItemSpecificCommand extends Command {
         }
         if (verb.equalsIgnoreCase("switch")) {
             GameState.instance().getAdventurersCurrentRoom().lightOn();
+            while (lightTurns != 0) {
+                lightTurns = lightTurns - 1;
+                if (lightTurns == 0)
+                    System.out.println("Your torch ran out.");
+            }
+
             /*
             Room descRoom = currentRoom.setDesc("This is a well-lit, albeit cluttered office, with many geeky toys sprawling on a desk.");
             descRoom.lightOn(); //it gets the desc before it can be reset?

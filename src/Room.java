@@ -34,6 +34,7 @@ class Room {
     private ArrayList<Exit> exits;
     private ArrayList<NPC> npcs;
     private boolean descFlip = false;
+    //private int lightTurns = 10;
 
     /**
      * Instantiates a new Room.
@@ -159,6 +160,7 @@ class Room {
             descFlip = true;
             setDesc("This is a well-lit, albeit cluttered office, with many geeky toys sprawling on a desk.");
             System.out.println(desc);
+
         }
         return null;
     }
