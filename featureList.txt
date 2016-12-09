@@ -28,8 +28,7 @@ Light - Some rooms, not all, will be completely dark to the adventurer unless
         "defuel" over time; i.e. there must be a finite length to how long they last before
         burning out. You can test Light in supplemental.txt by picking up the torch in the Rotunda,
         traveling down then west to Davies Office and typing "switch torch". The torch with light the
-        room and display another description. Proceed by going w,e,w,e,w,e,w,e,w,e for a total of 10
-        turns, then Davies Office will be dark again.
+        room and display another description.
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +42,8 @@ External Clock - Some passage of time exists in a way the adventurer can
 
 Closed and Locked Exits - Some exits can be in a closed or locked state. To test this in supplementary.bork
                           if you go down to the Basement hallway then south to room B13 you will get locked
-                          in with a bomb!!
+                          in with a bomb!! Also if you take the wand from the Rotunda Balcony then you
+                          can escape this laocked room by using to transport yourself to a random room.
 
 ------------------------------------------------------------------------------------------------------------
 
